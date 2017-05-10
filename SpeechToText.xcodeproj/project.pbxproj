@@ -14,6 +14,8 @@
 		CAAEE4231EC1CDEF00292860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE4211EC1CDEF00292860 /* LaunchScreen.storyboard */; };
 		CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE42D1EC1CDEF00292860 /* SpeechToTextTests.swift */; };
 		CAAEE4391EC1CDEF00292860 /* SpeechToTextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */; };
+		CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */; };
+		CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +33,28 @@
 			remoteGlobalIDString = CAAEE4141EC1CDEE00292860;
 			remoteInfo = SpeechToText;
 		};
+		CAAEE4761EC22F7A00292860 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAAEE40D1EC1CDEE00292860 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAAEE46E1EC22F7A00292860;
+			remoteInfo = SpeechToTextAction;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CAAEE4581EC2067600292860 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CAAEE4151EC1CDEF00292860 /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +70,9 @@
 		CAAEE4341EC1CDEF00292860 /* SpeechToTextUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechToTextUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextUITests.swift; sourceTree = "<group>"; };
 		CAAEE43A1EC1CDEF00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpeechToTextAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		CAAEE4751EC22F7A00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +97,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CAAEE46C1EC22F7A00292860 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -80,6 +113,7 @@
 				CAAEE4171EC1CDEF00292860 /* SpeechToText */,
 				CAAEE42C1EC1CDEF00292860 /* SpeechToTextTests */,
 				CAAEE4371EC1CDEF00292860 /* SpeechToTextUITests */,
+				CAAEE4701EC22F7A00292860 /* SpeechToTextAction */,
 				CAAEE4161EC1CDEF00292860 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +124,7 @@
 				CAAEE4151EC1CDEF00292860 /* SpeechToText.app */,
 				CAAEE4291EC1CDEF00292860 /* SpeechToTextTests.xctest */,
 				CAAEE4341EC1CDEF00292860 /* SpeechToTextUITests.xctest */,
+				CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +160,15 @@
 			path = SpeechToTextUITests;
 			sourceTree = "<group>";
 		};
+		CAAEE4701EC22F7A00292860 /* SpeechToTextAction */ = {
+			isa = PBXGroup;
+			children = (
+				CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */,
+				CAAEE4751EC22F7A00292860 /* Info.plist */,
+			);
+			path = SpeechToTextAction;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,10 +179,12 @@
 				CAAEE4111EC1CDEE00292860 /* Sources */,
 				CAAEE4121EC1CDEE00292860 /* Frameworks */,
 				CAAEE4131EC1CDEE00292860 /* Resources */,
+				CAAEE4581EC2067600292860 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CAAEE4771EC22F7A00292860 /* PBXTargetDependency */,
 			);
 			name = SpeechToText;
 			productName = SpeechToText;
@@ -181,6 +227,23 @@
 			productReference = CAAEE4341EC1CDEF00292860 /* SpeechToTextUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		CAAEE46E1EC22F7A00292860 /* SpeechToTextAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAAEE4791EC22F7A00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextAction" */;
+			buildPhases = (
+				CAAEE46B1EC22F7A00292860 /* Sources */,
+				CAAEE46C1EC22F7A00292860 /* Frameworks */,
+				CAAEE46D1EC22F7A00292860 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpeechToTextAction;
+			productName = SpeechToTextAction;
+			productReference = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,6 +256,7 @@
 				TargetAttributes = {
 					CAAEE4141EC1CDEE00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = Y9C5U29XEX;
 						ProvisioningStyle = Automatic;
 					};
 					CAAEE4281EC1CDEF00292860 = {
@@ -204,6 +268,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CAAEE4141EC1CDEE00292860;
+					};
+					CAAEE46E1EC22F7A00292860 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = Y9C5U29XEX;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -223,6 +292,7 @@
 				CAAEE4141EC1CDEE00292860 /* SpeechToText */,
 				CAAEE4281EC1CDEF00292860 /* SpeechToTextTests */,
 				CAAEE4331EC1CDEF00292860 /* SpeechToTextUITests */,
+				CAAEE46E1EC22F7A00292860 /* SpeechToTextAction */,
 			);
 		};
 /* End PBXProject section */
@@ -246,6 +316,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CAAEE4321EC1CDEF00292860 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAAEE46D1EC22F7A00292860 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -280,6 +357,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CAAEE46B1EC22F7A00292860 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -292,6 +377,11 @@
 			isa = PBXTargetDependency;
 			target = CAAEE4141EC1CDEE00292860 /* SpeechToText */;
 			targetProxy = CAAEE4351EC1CDEF00292860 /* PBXContainerItemProxy */;
+		};
+		CAAEE4771EC22F7A00292860 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAAEE46E1EC22F7A00292860 /* SpeechToTextAction */;
+			targetProxy = CAAEE4761EC22F7A00292860 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -413,7 +503,9 @@
 		CAAEE43E1EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText;
@@ -425,7 +517,9 @@
 		CAAEE43F1EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText;
@@ -488,6 +582,32 @@
 			};
 			name = Release;
 		};
+		CAAEE47A1EC22F7A00292860 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = Y9C5U29XEX;
+				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText.SpeechToTextAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CAAEE47B1EC22F7A00292860 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = Y9C5U29XEX;
+				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText.SpeechToTextAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -507,6 +627,7 @@
 				CAAEE43F1EC1CDEF00292860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAAEE4401EC1CDEF00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +636,7 @@
 				CAAEE4421EC1CDEF00292860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAAEE4431EC1CDEF00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +645,16 @@
 				CAAEE4451EC1CDEF00292860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAAEE4791EC22F7A00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAAEE47A1EC22F7A00292860 /* Debug */,
+				CAAEE47B1EC22F7A00292860 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
