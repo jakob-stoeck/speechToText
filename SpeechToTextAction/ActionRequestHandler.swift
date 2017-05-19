@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 import Speech
 import UserNotifications
+import os.log
 
 class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
@@ -33,7 +34,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }
     }
 
-    func post(url: URL, data: Data, completionHandler: @escaping ([String: Any]) -> ()) {
+    func post(url: URL, data: Data, completionHandler: @escaping (Data) -> ()) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = data
@@ -41,41 +42,53 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         let session = URLSession.shared
         session.dataTask(with: request) {data, response, err in
             if err != nil {
-                print(err.debugDescription)
+                os_log("%@", log: OSLog.default, type: .error, err.debugDescription)
             }
             if data != nil {
-                print(String(data: data!, encoding: .utf8)!)
-                completionHandler(try! JSONSerialization.jsonObject(with: data!) as! [String: Any])
+                os_log("%@", log: OSLog.default, type: .debug, (String(data: data!, encoding: .utf8)!))
+                completionHandler(data!)
             }
         }.resume()
     }
 
     func notify(title: String, body: String) {
         let center = UNUserNotificationCenter.current()
-        let options: UNAuthorizationOptions = [.alert, .sound]
+        let options: UNAuthorizationOptions = [.alert]
         center.requestAuthorization(options: options) {
             (granted, error) in
             if !granted {
-                print("Something went wrong")
+                os_log("Something went wrong", log: OSLog.default, type: .error)
             }
         }
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
         let identifier = "STTLocalNotification"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         center.add(request, withCompletionHandler: { (error) in
             if error != nil {
-                print("Notification went wrong")
+                os_log("Notification went wrong", log: OSLog.default, type: .error)
             }
         })
     }
 
-    func recognizeFileGoogle(url: URL, completionHandler: @escaping (String) -> ()) {
+    func errorHandler(_ text: String, title: String = "Error") {
+        os_log("%@: %@", log: OSLog.default, type: .error, title, text)
+        notify(title: title, body: text)
+        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        self.extensionContext = nil
+    }
+
+    func recognizeFileGoogle(url: URL, completionHandler: @escaping (Transcript) -> ()) {
+        guard let audioContent = try? Data(contentsOf: url).base64EncodedString() else {
+            errorHandler("cannot read audio file")
+            return
+        }
+
         let data = [
             "audio": [
-                "content": NSData(contentsOf: url)!.base64EncodedString()
+                "content": audioContent
             ],
             "config": [
                 "languageCode": "de-DE",
@@ -86,45 +99,38 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         let key = "AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4"
 
         guard JSONSerialization.isValidJSONObject(data) else {
-            print("json fail")
+            errorHandler("json fail")
             return
         }
 
         guard let json = try? JSONSerialization.data(withJSONObject: data) else {
-            print ("serialization fail")
+            errorHandler("serialization fail")
             return
         }
-        print("asking google")
-        post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json, completionHandler: { (dictionary) in
-            // TODO map over all results and concatenate the transcripts
-            if let results = dictionary["results"] as? [[String: Any]],
-                let alternatives = results[0]["alternatives"] as? [[String: Any]],
-                let transcript = alternatives[0]["transcript"] as? String {
-                    completionHandler(transcript)
+        os_log("asking google", log: OSLog.default, type: .debug)
+        post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
+            guard let transcript = Transcript.init(googleSpeechApiResponse: $0) else {
+                self.errorHandler("response invalid")
+                return
             }
-        })
+            completionHandler(transcript)
+        }
     }
 
     func beginRequest(with context: NSExtensionContext) {
-        print("extension requested")
-        askPermission()
+        os_log("extension requested", log: OSLog.default, type: .debug)
         self.extensionContext = context
-
         var found = false
-
-        // Find the item containing the results from the JavaScript preprocessing.
         outer:
             for item in context.inputItems as! [NSExtensionItem] {
                 if let attachments = item.attachments {
                     for itemProvider in attachments as! [NSItemProvider] {
                         if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypeURL)) {
-                            itemProvider.loadItem(forTypeIdentifier: String(kUTTypeURL), options: nil, completionHandler: { (item, error) in
-                                // file:///private/var/mobile/Containers/Data/Application/4203177E-CF60-49B1-AC06-257D70DF91AA/tmp/documents/C5D72611-79EE-4F83-B93F-38D8C51DD911/2017-05-10-AUDIO-00001224.opus
+                            itemProvider.loadItem(forTypeIdentifier: String(kUTTypeURL), options: nil) { (item, error) in
                                 OperationQueue.main.addOperation {
-                                    self.recognizeFileGoogle(url: item as! URL, completionHandler: self.done)
-//                                    notify(title: "Speech to text", body: result)
+                                    self.recognizeFile(url: item as! URL, completionHandler: self.done)
                                 }
-                            })
+                            }
                             found = true
                             break outer
                         }
@@ -133,65 +139,47 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }
         
         if !found {
-            self.done(nil)
+            errorHandler("No audio found")
         }
     }
 
-    func recognizeFileApple(url: URL, completionHandler: @escaping (String) -> ()) {
+    func recognizeFile(url: URL, completionHandler: @escaping (Transcript) -> ()) {
+        self.recognizeFileGoogle(url: url, completionHandler: self.done)
+    }
+
+    func recognizeFileApple(url: URL, completionHandler: @escaping (Transcript) -> ()) {
+        askPermission()
         guard let recognizer = SFSpeechRecognizer() else {
-            // locale not supported
+            errorHandler("locale not supported")
             return
         }
         if !recognizer.isAvailable {
-            // not available, e.g. no internet
+            errorHandler("not available, e.g. no internet")
             return
         }
         let request = SFSpeechURLRecognitionRequest(url: url)
-        print("asking apple")
+        os_log("asking apple", log: OSLog.default, type: .debug)
         recognizer.recognitionTask(with: request) { (result, error) in
             guard let result = result else {
-                print(error!)
+                self.errorHandler(error as! String)
                 return
             }
             if result.isFinal {
-                completionHandler(result.bestTranscription.formattedString)
+                guard let transcript = Transcript.init(appleSpeechApiResponse: result) else {
+                    self.errorHandler("result parsing failed")
+                    return
+                }
+                completionHandler(transcript)
             }
         }
     }
 
-    func done(_ transcript: String?) {
-        if transcript != nil {
-            self.notify(title: "Speech to text", body: transcript!)
-        }
+    func done(_ transcript: Transcript) {
+        os_log("sending notify, saving transcript", log: OSLog.default, type: .debug)
+        self.notify(title: "Speech to text", body: transcript.text)
+        transcript.save(userDefaultsKey: "lastTranscript")
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         self.extensionContext = nil
     }
-
-//    func doneWithResults(_ resultsForJavaScriptFinalizeArg: [String: Any]?) {
-//        if let resultsForJavaScriptFinalize = resultsForJavaScriptFinalizeArg {
-//            // Construct an NSExtensionItem of the appropriate type to return our
-//            // results dictionary in.
-//            
-//            // These will be used as the arguments to the JavaScript finalize()
-//            // method.
-//            
-//            let resultsDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: resultsForJavaScriptFinalize]
-//            
-//            let resultsProvider = NSItemProvider(item: resultsDictionary as NSDictionary, typeIdentifier: String(kUTTypePropertyList))
-//            
-//            let resultsItem = NSExtensionItem()
-//            resultsItem.attachments = [resultsProvider]
-//            
-//            // Signal that we're complete, returning our results.
-//            self.extensionContext!.completeRequest(returningItems: [resultsItem], completionHandler: nil)
-//        } else {
-//            // We still need to signal that we're done even if we have nothing to
-//            // pass back.
-//            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-//        }
-//        
-//        // Don't hold on to this after we finished with it.
-//        self.extensionContext = nil
-//    }
 
 }

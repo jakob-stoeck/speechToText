@@ -20,17 +20,11 @@ class SpeechToTextTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testGoogleResponseInitializationSucceeds() {
+        let response = "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"
+        let googleTranscript = Transcript.init(googleSpeechApiResponse: response.data(using: .utf8)!)
+        XCTAssertNotNil(googleTranscript)
+        XCTAssertEqual("abcdef", googleTranscript!.text)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

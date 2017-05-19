@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */; };
 		CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */; };
 		CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE41A1EC1CDEF00292860 /* ViewController.swift */; };
 		CAAEE41E1EC1CDEF00292860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41C1EC1CDEF00292860 /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 		CAAEE4391EC1CDEF00292860 /* SpeechToTextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */; };
 		CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */; };
 		CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
+		CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpeechToTextAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		CAAEE4751EC22F7A00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CABF826E1ECED84700065A08 /* SpeechToText.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToText.entitlements; sourceTree = "<group>"; };
+		CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToTextAction.entitlements; sourceTree = "<group>"; };
+		CAE1499D1ECDB5A600162D3E /* Transcript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transcript.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +138,10 @@
 		CAAEE4171EC1CDEF00292860 /* SpeechToText */ = {
 			isa = PBXGroup;
 			children = (
+				CABF826E1ECED84700065A08 /* SpeechToText.entitlements */,
 				CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */,
 				CAAEE41A1EC1CDEF00292860 /* ViewController.swift */,
+				CAE1499D1ECDB5A600162D3E /* Transcript.swift */,
 				CAAEE41C1EC1CDEF00292860 /* Main.storyboard */,
 				CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */,
 				CAAEE4211EC1CDEF00292860 /* LaunchScreen.storyboard */,
@@ -163,6 +171,7 @@
 		CAAEE4701EC22F7A00292860 /* SpeechToTextAction */ = {
 			isa = PBXGroup;
 			children = (
+				CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */,
 				CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */,
 				CAAEE4751EC22F7A00292860 /* Info.plist */,
 			);
@@ -258,6 +267,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = Y9C5U29XEX;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					CAAEE4281EC1CDEF00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -273,6 +287,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = Y9C5U29XEX;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -326,6 +345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +358,7 @@
 			files = (
 				CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */,
 				CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */,
+				CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */,
+				CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,10 +527,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SpeechToText/SpeechToText.entitlements;
 				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText;
+				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.SpeechToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -519,10 +542,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SpeechToText/SpeechToText.entitlements;
 				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText;
+				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.SpeechToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -585,10 +609,12 @@
 		CAAEE47A1EC22F7A00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Action Icon";
+				CODE_SIGN_ENTITLEMENTS = SpeechToTextAction/SpeechToTextAction.entitlements;
 				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText.SpeechToTextAction;
+				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.SpeechToText.SpeechToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -598,10 +624,12 @@
 		CAAEE47B1EC22F7A00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Action Icon";
+				CODE_SIGN_ENTITLEMENTS = SpeechToTextAction/SpeechToTextAction.entitlements;
 				DEVELOPMENT_TEAM = Y9C5U29XEX;
 				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToText.SpeechToTextAction;
+				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.SpeechToText.SpeechToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
