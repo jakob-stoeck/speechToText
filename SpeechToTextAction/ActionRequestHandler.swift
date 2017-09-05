@@ -78,8 +78,6 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
     func errorHandler(_ text: String, title: String = "Error") {
         os_log("%@: %@", log: OSLog.default, type: .error, title, text)
         notify(title: title, body: text)
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-        self.extensionContext = nil
     }
 
     func recognizeFileGoogle(url: URL, completionHandler: @escaping (Transcript) -> ()) {
@@ -103,8 +101,6 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
                 "sampleRateHertz": 16000
             ]
         ]
-        // TODO get that out of the app
-        let key = "AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4"
 
         guard JSONSerialization.isValidJSONObject(data) else {
             errorHandler("json fail")
@@ -117,6 +113,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }
         os_log("asking google", log: OSLog.default, type: .debug)
         // there is a streaming API which might be faster than waiting to upload everything
+        let key = getCloudSpeechApiKey()
         post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
             guard let transcript = Transcript.init(googleSpeechApiResponse: $0) else {
                 self.errorHandler("response invalid")
@@ -124,6 +121,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             }
             completionHandler(transcript)
         }
+    }
+
+    func getCloudSpeechApiKey() -> String {
+        return Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as! String
     }
 
     func beginRequest(with context: NSExtensionContext) {
@@ -194,9 +195,13 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             body: transcript.text
         )
         transcript.save()
-        // clean up request
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-        self.extensionContext = nil
+        cleanUp()
     }
 
+    func cleanUp() {
+        if self.extensionContext != nil {
+            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+            self.extensionContext = nil
+        }
+    }
 }
