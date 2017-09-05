@@ -24,11 +24,13 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
                     // jay
                     break
                 case .denied:
-                    break;
+                    fallthrough
                 case .restricted:
-                    break
+                    fallthrough
                 case .notDetermined:
-                    break
+                    fallthrough
+                default:
+                    self.errorHandler("Speech recognition was not authorized")
                 }
             }
         }
@@ -86,16 +88,22 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             return
         }
 
+        notify(
+            title: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"),
+            body: NSLocalizedString("action.loading_body", value: "Please wait a moment", comment: "Notification body while transcription in progress")
+        )
+
         let data = [
             "audio": [
                 "content": audioContent
             ],
             "config": [
-                "languageCode": "de-DE",
+                "languageCode": Transcript.getLanguage(),
                 "encoding": "OGG_OPUS",
                 "sampleRateHertz": 16000
             ]
         ]
+        // TODO get that out of the app
         let key = "AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4"
 
         guard JSONSerialization.isValidJSONObject(data) else {
@@ -108,6 +116,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             return
         }
         os_log("asking google", log: OSLog.default, type: .debug)
+        // there is a streaming API which might be faster than waiting to upload everything
         post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
             guard let transcript = Transcript.init(googleSpeechApiResponse: $0) else {
                 self.errorHandler("response invalid")
@@ -122,14 +131,16 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         self.extensionContext = context
         var found = false
         outer:
+            // filter the correct data type out of the received objects and send it to the callback function
             for item in context.inputItems as! [NSExtensionItem] {
                 if let attachments = item.attachments {
                     for itemProvider in attachments as! [NSItemProvider] {
                         if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypeURL)) {
                             itemProvider.loadItem(forTypeIdentifier: String(kUTTypeURL), options: nil) { (item, error) in
-                                OperationQueue.main.addOperation {
-                                    self.recognizeFile(url: item as! URL, completionHandler: self.done)
+                                if error != nil {
+                                    self.errorHandler(error as! String)
                                 }
+                                self.receivedUrl(url: item as! URL)
                             }
                             found = true
                             break outer
@@ -143,8 +154,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }
     }
 
-    func recognizeFile(url: URL, completionHandler: @escaping (Transcript) -> ()) {
-        self.recognizeFileGoogle(url: url, completionHandler: self.done)
+    func receivedUrl(url: URL) {
+        OperationQueue.main.addOperation {
+            self.recognizeFileGoogle(url: url, completionHandler: self.done)
+        }
     }
 
     func recognizeFileApple(url: URL, completionHandler: @escaping (Transcript) -> ()) {
@@ -176,8 +189,12 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
     func done(_ transcript: Transcript) {
         os_log("sending notify, saving transcript", log: OSLog.default, type: .debug)
-        self.notify(title: "Speech to text", body: transcript.text)
-        transcript.save(userDefaultsKey: "lastTranscript")
+        self.notify(
+            title: NSLocalizedString("action.transcript_ready", value: "Speech to text:", comment: "Notification title when transcription is done"),
+            body: transcript.text
+        )
+        transcript.save()
+        // clean up request
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         self.extensionContext = nil
     }

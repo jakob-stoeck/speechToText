@@ -1,0 +1,6 @@
+/* Button title to change language */
+"main.change_language" = "Sprache: %@. Tap zum ändern.";
+
+/* Displayed when text was deleted */
+"main.deleted" = "(gelöscht) 👻";
+

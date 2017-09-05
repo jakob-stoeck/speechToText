@@ -1,0 +1,9 @@
+/* Notification body while transcription in progress */
+"action.loading_body" = "Bitte warten";
+
+/* Notification title while transcription in progress */
+"action.loading_title" = "Spracherkennung ...";
+
+/* Notification title when transcription is done */
+"action.transcript_ready" = "Sprache zu Text:";
+

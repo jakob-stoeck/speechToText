@@ -6,6 +6,9 @@
 //  Copyright © 2017 Jakob Stoeck. All rights reserved.
 //
 
+// TODO show error messages
+// TODO show error when notifications are disabled
+
 import UIKit
 import os.log
 
@@ -14,11 +17,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.loadData), name: NSNotification.Name(rawValue: "LastTranscriptShouldRefresh"), object: nil)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        loadData()
+        self.loadData()
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) {_ in
+            os_log("app will enter foreground", log: OSLog.default, type: .debug)
+            self.loadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,20 +31,24 @@ class ViewController: UIViewController {
 
     func loadData() {
         os_log("loading last transcript", log: OSLog.default, type: .debug)
-        guard let text = Transcript.init(userDefaultsKey: "lastTranscript")?.text else {
-            return
-        }
-        lastMessageTextField.text = text
+        let lang = Transcript.getLanguage()
+        let format = NSLocalizedString("main.change_language", value: "Voice language: %@. Tap to change.", comment: "Button title to change language")
+        self.openSettingsButton.setTitle(String.localizedStringWithFormat(format, lang), for: UIControlState.normal)
+        lastMessageTextField.text = Transcript.getLastMessage()
     }
 
     //MARK: Properties
     @IBOutlet weak var lastMessageTextField: UITextView!
+    @IBOutlet weak var openSettingsButton: UIButton!
 
     //MARK: Actions
-    @IBAction func clearLastMessage(_ sender: UIButton) {
-        Transcript.init(text: "(deleted) 👻")?.save(userDefaultsKey: "lastTranscript")
+    @IBAction func clear(_ sender: UIBarButtonItem) {
+        Transcript.init(text: NSLocalizedString("main.deleted", value: "(deleted) 👻", comment: "Displayed when text was deleted"))?.save()
         loadData()
     }
 
+    @IBAction func openSettings(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
+    }
 }
 

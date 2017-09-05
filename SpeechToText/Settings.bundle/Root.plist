@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationGroupContainerIdentifier</key>
+	<string>group.de.jakobstoeck.voicetotext</string>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Language Settings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Language</string>
+			<key>Key</key>
+			<string>language_preference</string>
+			<key>DefaultValue</key>
+			<string>en-US</string>
+			<key>Titles</key>
+			<array>
+				<string>Afrikaans (Suid-Afrika)</string>
+				<string>Bahasa Indonesia (Indonesia)</string>
+				<string>Bahasa Melayu (Malaysia)</string>
+				<string>Català (Espanya)</string>
+				<string>Čeština (Česká republika)</string>
+				<string>Dansk (Danmark)</string>
+				<string>Deutsch (Deutschland)</string>
+				<string>English (Australia)</string>
+				<string>English (Canada)</string>
+				<string>English (Great Britain)</string>
+				<string>English (India)</string>
+				<string>English (Ireland)</string>
+				<string>English (New Zealand)</string>
+				<string>English (Philippines)</string>
+				<string>English (South Africa)</string>
+				<string>English (United States)</string>
+				<string>Español (Argentina)</string>
+				<string>Español (Bolivia)</string>
+				<string>Español (Chile)</string>
+				<string>Español (Colombia)</string>
+				<string>Español (Costa Rica)</string>
+				<string>Español (Ecuador)</string>
+				<string>Español (El Salvador)</string>
+				<string>Español (España)</string>
+				<string>Español (Estados Unidos)</string>
+				<string>Español (Guatemala)</string>
+				<string>Español (Honduras)</string>
+				<string>Español (México)</string>
+				<string>Español (Nicaragua)</string>
+				<string>Español (Panamá)</string>
+				<string>Español (Paraguay)</string>
+				<string>Español (Perú)</string>
+				<string>Español (Puerto Rico)</string>
+				<string>Español (República Dominicana)</string>
+				<string>Español (Uruguay)</string>
+				<string>Español (Venezuela)</string>
+				<string>Euskara (Espainia)</string>
+				<string>Filipino (Pilipinas)</string>
+				<string>Français (Canada)</string>
+				<string>Français (France)</string>
+				<string>Galego (España)</string>
+				<string>Hrvatski (Hrvatska)</string>
+				<string>IsiZulu (Ningizimu Afrika)</string>
+				<string>Íslenska (Ísland)</string>
+				<string>Italiano (Italia)</string>
+				<string>Lietuvių (Lietuva)</string>
+				<string>Magyar (Magyarország)</string>
+				<string>Nederlands (Nederland)</string>
+				<string>Norsk bokmål (Norge)</string>
+				<string>Polski (Polska)</string>
+				<string>Português (Brasil)</string>
+				<string>Português (Portugal)</string>
+				<string>Română (România)</string>
+				<string>Slovenčina (Slovensko)</string>
+				<string>Slovenščina (Slovenija)</string>
+				<string>Suomi (Suomi)</string>
+				<string>Svenska (Sverige)</string>
+				<string>Tiếng Việt (Việt Nam)</string>
+				<string>Türkçe (Türkiye)</string>
+				<string>Ελληνικά (Ελλάδα)</string>
+				<string>Български (България)</string>
+				<string>Русский (Россия)</string>
+				<string>Српски (Србија)</string>
+				<string>Українська (Україна)</string>
+				<string>עברית (ישראל)</string>
+				<string>العربية (إسرائيل)</string>
+				<string>العربية (الأردن)</string>
+				<string>العربية (الإمارات)</string>
+				<string>العربية (البحرين)</string>
+				<string>العربية (الجزائر)</string>
+				<string>العربية (السعودية)</string>
+				<string>العربية (العراق)</string>
+				<string>العربية (الكويت)</string>
+				<string>العربية (المغرب)</string>
+				<string>العربية (تونس)</string>
+				<string>العربية (عُمان)</string>
+				<string>العربية (فلسطين)</string>
+				<string>العربية (قطر)</string>
+				<string>العربية (لبنان)</string>
+				<string>العربية (مصر)</string>
+				<string>فارسی (ایران)</string>
+				<string>हिन्दी (भारत)</string>
+				<string>ไทย (ประเทศไทย)</string>
+				<string>한국어 (대한민국)</string>
+				<string>國語 (台灣)</string>
+				<string>廣東話 (香港)</string>
+				<string>日本語（日本）</string>
+				<string>普通話 (香港)</string>
+				<string>普通话 (中国大陆)</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>af-ZA</string>
+				<string>id-ID</string>
+				<string>ms-MY</string>
+				<string>ca-ES</string>
+				<string>cs-CZ</string>
+				<string>da-DK</string>
+				<string>de-DE</string>
+				<string>en-AU</string>
+				<string>en-CA</string>
+				<string>en-GB</string>
+				<string>en-IN</string>
+				<string>en-IE</string>
+				<string>en-NZ</string>
+				<string>en-PH</string>
+				<string>en-ZA</string>
+				<string>en-US</string>
+				<string>es-AR</string>
+				<string>es-BO</string>
+				<string>es-CL</string>
+				<string>es-CO</string>
+				<string>es-CR</string>
+				<string>es-EC</string>
+				<string>es-SV</string>
+				<string>es-ES</string>
+				<string>es-US</string>
+				<string>es-GT</string>
+				<string>es-HN</string>
+				<string>es-MX</string>
+				<string>es-NI</string>
+				<string>es-PA</string>
+				<string>es-PY</string>
+				<string>es-PE</string>
+				<string>es-PR</string>
+				<string>es-DO</string>
+				<string>es-UY</string>
+				<string>es-VE</string>
+				<string>eu-ES</string>
+				<string>fil-PH</string>
+				<string>fr-CA</string>
+				<string>fr-FR</string>
+				<string>gl-ES</string>
+				<string>hr-HR</string>
+				<string>zu-ZA</string>
+				<string>is-IS</string>
+				<string>it-IT</string>
+				<string>lt-LT</string>
+				<string>hu-HU</string>
+				<string>nl-NL</string>
+				<string>nb-NO</string>
+				<string>pl-PL</string>
+				<string>pt-BR</string>
+				<string>pt-PT</string>
+				<string>ro-RO</string>
+				<string>sk-SK</string>
+				<string>sl-SI</string>
+				<string>fi-FI</string>
+				<string>sv-SE</string>
+				<string>vi-VN</string>
+				<string>tr-TR</string>
+				<string>el-GR</string>
+				<string>bg-BG</string>
+				<string>ru-RU</string>
+				<string>sr-RS</string>
+				<string>uk-UA</string>
+				<string>he-IL</string>
+				<string>ar-IL</string>
+				<string>ar-JO</string>
+				<string>ar-AE</string>
+				<string>ar-BH</string>
+				<string>ar-DZ</string>
+				<string>ar-SA</string>
+				<string>ar-IQ</string>
+				<string>ar-KW</string>
+				<string>ar-MA</string>
+				<string>ar-TN</string>
+				<string>ar-OM</string>
+				<string>ar-PS</string>
+				<string>ar-QA</string>
+				<string>ar-LB</string>
+				<string>ar-EG</string>
+				<string>fa-IR</string>
+				<string>hi-IN</string>
+				<string>th-TH</string>
+				<string>ko-KR</string>
+				<string>cmn-Hant-TW</string>
+				<string>yue-Hant-HK</string>
+				<string>ja-JP</string>
+				<string>cmn-Hans-HK</string>
+				<string>cmn-Hans-CN</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
