@@ -1,11 +1,6 @@
 {
   "images" : [
     {
-      "idiom" : "ios-marketing",
-      "size" : "1024x1024",
-      "scale" : "1x"
-    },
-    {
       "size" : "20x20",
       "idiom" : "iphone",
       "filename" : "parrot1600 copyiPhoneNotification_20pt@2x.png",
