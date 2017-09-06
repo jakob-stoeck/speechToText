@@ -27,4 +27,12 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertNotNil(googleTranscript)
         XCTAssertEqual("abcdef", googleTranscript!.text)
     }
+
+    func testLanguage() {
+        XCTAssertEqual("en", Settings.getLanguagePart("en-US"))
+        XCTAssertEqual("en", Settings.getLanguagePart("en"))
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de-US", values: ["de-DE", "en-US", "pt-BR"]))
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de_US", values: ["de-DE", "en-US", "pt-BR"]))
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de", values: ["de-DE", "en-US", "pt-BR"]))
+    }
 }

@@ -31,10 +31,16 @@ class ViewController: UIViewController {
 
     func loadData() {
         os_log("loading last transcript", log: OSLog.default, type: .debug)
-        let lang = Transcript.getLanguage()
+        let lang = Settings.getLanguage()
         let format = NSLocalizedString("main.change_language", value: "Voice language: %@. Tap to change.", comment: "Button title to change language")
         self.openSettingsButton.setTitle(String.localizedStringWithFormat(format, lang), for: UIControlState.normal)
-        lastMessageTextField.text = Transcript.getLastMessage()
+        let lastMessage = Transcript.getLastMessage()
+        if lastMessage == "" {
+            lastMessageTextField.text = NSLocalizedString("main.last_message", value: "Your last speech to text message will appear here", comment: "Placeholder when there is no last message yet")
+        }
+        else {
+            lastMessageTextField.text = lastMessage
+        }
     }
 
     //MARK: Properties

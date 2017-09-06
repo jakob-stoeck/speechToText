@@ -96,7 +96,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
                 "content": audioContent
             ],
             "config": [
-                "languageCode": Transcript.getLanguage(),
+                "languageCode": Settings.getLanguage(),
                 "encoding": "OGG_OPUS",
                 "sampleRateHertz": 16000
             ]

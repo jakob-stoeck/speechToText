@@ -16,6 +16,7 @@
 		CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */; };
+		CAA9CE461F5FF84A0044AF54 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
 		CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */; };
 		CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE41A1EC1CDEF00292860 /* ViewController.swift */; };
 		CAAEE41E1EC1CDEF00292860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41C1EC1CDEF00292860 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 		CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
+		CAFD70081F60176F007862D8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,7 @@
 		CA35C9541F5EF9CF004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CA52DEC61F0B766000D96FEC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CA6C1ACC1F5EEE1C003A97FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		CAA9CE451F5FF84A0044AF54 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CAAEE4151EC1CDEF00292860 /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAAEE41A1EC1CDEF00292860 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 				CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */,
 				CAAEE41A1EC1CDEF00292860 /* ViewController.swift */,
 				CAE1499D1ECDB5A600162D3E /* Transcript.swift */,
+				CAA9CE451F5FF84A0044AF54 /* Settings.swift */,
 				CAAEE41C1EC1CDEF00292860 /* Main.storyboard */,
 				CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */,
 				CAAEE4211EC1CDEF00292860 /* LaunchScreen.storyboard */,
@@ -394,6 +398,7 @@
 			files = (
 				CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */,
 				CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */,
+				CAA9CE461F5FF84A0044AF54 /* Settings.swift in Sources */,
 				CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
 				CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */,
 				CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
@@ -564,9 +570,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -615,8 +623,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -634,7 +644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -650,7 +660,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -664,7 +674,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Debug;
@@ -679,7 +689,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Release;
@@ -693,7 +703,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Debug;
@@ -707,7 +717,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Release;
@@ -724,7 +734,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -740,7 +750,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

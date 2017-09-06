@@ -13,8 +13,6 @@ import os.log
 class Transcript {
 
     let text: String
-    static let appGroup = "group.de.jakobstoeck.voicetotext"
-    static let settings = UserDefaults(suiteName: Transcript.appGroup)!
     static let lastMessageKey = "Transcript/lastTranscript"
     static let lastMessageDefault = ""
 
@@ -38,25 +36,13 @@ class Transcript {
     }
 
     class func getLastMessage() -> String {
-        guard let text = Transcript.settings.string(forKey: Transcript.lastMessageKey) else {
+        guard let text = Settings.defaults.string(forKey: Transcript.lastMessageKey) else {
             return lastMessageDefault
         }
         return text
     }
 
-    class func getLanguage() -> String {
-        if let lang = Transcript.settings.string(forKey: "language_preference") {
-            return lang
-        }
-        else if let lang = Locale.preferredLanguages.first {
-            return lang
-        }
-        else {
-            return "en-GB"
-        }
-    }
-
     func save() {
-        Transcript.settings.set(text, forKey: Transcript.lastMessageKey)
+        Settings.defaults.set(text, forKey: Transcript.lastMessageKey)
     }
 }
