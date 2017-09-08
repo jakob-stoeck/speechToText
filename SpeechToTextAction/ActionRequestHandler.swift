@@ -53,7 +53,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }.resume()
     }
 
-    func notify(title: String, body: String) {
+    func notify(title: String?, body: String, removePending: Bool = false) {
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert]
         center.requestAuthorization(options: options) {
@@ -63,16 +63,23 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             }
         }
         let content = UNMutableNotificationContent()
-        content.title = title
+        if title != nil {
+            content.title = title!
+        }
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let identifier = "STTLocalNotification"
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+        let identifier = UUID().uuidString
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        if removePending {
+            center.removeAllDeliveredNotifications()
+            center.removeAllPendingNotificationRequests()
+        }
         center.add(request, withCompletionHandler: { (error) in
             if error != nil {
                 os_log("Notification went wrong", log: OSLog.default, type: .error)
             }
         })
+        os_log("notification request: \"%@\": \"%@\"", log: OSLog.default, type: .debug, title ?? "", body)
     }
 
     func errorHandler(_ text: String, title: String = "Error") {
@@ -189,10 +196,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
     }
 
     func done(_ transcript: Transcript) {
-        os_log("sending notify, saving transcript", log: OSLog.default, type: .debug)
         self.notify(
             title: NSLocalizedString("action.transcript_ready", value: "Speech to text:", comment: "Notification title when transcription is done"),
-            body: transcript.text
+            body: transcript.text,
+            removePending: true
         )
         transcript.save()
         cleanUp()

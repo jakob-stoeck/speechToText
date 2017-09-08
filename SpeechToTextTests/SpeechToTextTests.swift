@@ -22,17 +22,26 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testGoogleResponseInitializationSucceeds() {
-        let response = "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"
-        let googleTranscript = Transcript.init(googleSpeechApiResponse: response.data(using: .utf8)!)
-        XCTAssertNotNil(googleTranscript)
-        XCTAssertEqual("abcdef", googleTranscript!.text)
+        let responses = [
+                ["abcdef", "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"],
+                ["viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe", "{\"results\": [{\"alternatives\": [{\"transcript\": \"viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe\",\"confidence\": 0.9414088}]}]}"],
+        ]
+        for resp in responses {
+            let transcribed = resp[0]
+            let rawJson = resp[1]
+            let googleTranscript = Transcript.init(googleSpeechApiResponse: rawJson.data(using: .utf8)!)
+            XCTAssertNotNil(googleTranscript)
+            XCTAssertEqual(transcribed, googleTranscript!.text)
+        }
     }
 
     func testLanguage() {
         XCTAssertEqual("en", Settings.getLanguagePart("en-US"))
         XCTAssertEqual("en", Settings.getLanguagePart("en"))
-        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de-US", values: ["de-DE", "en-US", "pt-BR"]))
-        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de_US", values: ["de-DE", "en-US", "pt-BR"]))
-        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de", values: ["de-DE", "en-US", "pt-BR"]))
+        let codes = ["de-DE", "en-US", "pt-BR"]
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de-US", values: codes))
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de_US", values: codes))
+        XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de", values: codes))
+        XCTAssertEqual("en-US", Settings.getNormalizedLanguage(code: "asdf", values: codes))
     }
 }

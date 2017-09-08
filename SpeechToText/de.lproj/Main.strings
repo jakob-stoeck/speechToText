@@ -1,6 +1,12 @@
 /* Class = "UILabel"; text = "App Icon by Icons8"; ObjectID = "IQH-Jv-a9j"; */
 "IQH-Jv-a9j.text" = "App Icon von Icons8";
 
+/* Class = "UITextView"; text = "last message"; ObjectID = "dGN-rD-IOV"; */
+"dGN-rD-IOV.text" = "Letzte Nachricht";
+
+/* Class = "UIButton"; normalTitle = "Change Language"; ObjectID = "tAh-3H-qAb"; */
+"tAh-3H-qAb.normalTitle" = "Sprache ändern";
+
 /* Class = "UINavigationItem"; title = "Last Message"; ObjectID = "yJB-2C-1cn"; */
 "yJB-2C-1cn.title" = "Letzte Nachricht";
 

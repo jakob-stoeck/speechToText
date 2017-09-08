@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
 	<string>That’s what she said</string>
 	<key>CFBundleExecutable</key>
@@ -19,7 +19,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>6</string>
+	<key>CloudSpeechApiKey</key>
+	<string>AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -45,7 +47,5 @@
 	</dict>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Transcribe speech to text</string>
-    <key>CloudSpeechApiKey</key>
-    <string>AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4</string>
 </dict>
 </plist>
