@@ -1,3 +1,6 @@
+/* There was no item which could have been speech recognized */
+"action.error" = "Keinen Ton gefunden";
+
 /* Notification body while transcription in progress */
 "action.loading_body" = "Bitte warten";
 
@@ -6,4 +9,34 @@
 
 /* Notification title when transcription is done */
 "action.transcript_ready" = "Sprache zu Text:";
+
+/* Apple SR is not available */
+"speech.apple.availability" = "Nicht verfügbar (kein Internet?)";
+
+/* Apple SR does not support the current locale */
+"speech.apple.locale" = "Sprache wird nicht unterstützt";
+
+/* Apple SR returned an unknown response */
+"speech.apple.parsing" = "Ergebnis falsch formatiert";
+
+/* Apple SR was unauthorized */
+"speech.apple.unauthorized" = "Spracherkennung wurde nicht autorisiert";
+
+/* Google request could not be built */
+"speech.google.json" = "Anfrage fehlgeschlagen";
+
+/* Audio file is not readable */
+"speech.google.loading" = "Audio Datei kann nicht gelesen werden";
+
+/* Google response is in an unknown format */
+"speech.google.response" = "Rückgabe ist nicht lesbar";
+
+/* Google request could not be serialzed */
+"speech.google.serializing" = "Rückgabe fehlgeschlagen";
+
+/* Audio file is too big */
+"speech.google.toobig" = "Datei ist zu groß";
+
+/* Title of a generic error message */
+"util.error.title" = "Fehler";
 
