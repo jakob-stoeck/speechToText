@@ -26,6 +26,12 @@
 		CAAEE4391EC1CDEF00292860 /* SpeechToTextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */; };
 		CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */; };
 		CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */; };
+		CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2594B1F69C954007C4BB3 /* Util.swift */; };
+		CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */; };
+		CAC2594E1F69D825007C4BB3 /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
+		CAC2594F1F69D829007C4BB3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
+		CAC259511F69D836007C4BB3 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2594B1F69C954007C4BB3 /* Util.swift */; };
 		CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 		CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 		CAFD70081F60176F007862D8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
@@ -98,6 +104,8 @@
 		CAAEE4751EC22F7A00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABF826E1ECED84700065A08 /* SpeechToText.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToText.entitlements; sourceTree = "<group>"; };
 		CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToTextAction.entitlements; sourceTree = "<group>"; };
+		CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		CAC2594B1F69C954007C4BB3 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		CAE1499D1ECDB5A600162D3E /* Transcript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transcript.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +210,8 @@
 				CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */,
 				CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */,
 				CAAEE4751EC22F7A00292860 /* Info.plist */,
+				CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */,
+				CAC2594B1F69C954007C4BB3 /* Util.swift */,
 			);
 			path = SpeechToTextAction;
 			sourceTree = "<group>";
@@ -408,6 +418,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */,
+				CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */,
+				CAC259511F69D836007C4BB3 /* Util.swift in Sources */,
+				CAC2594F1F69D829007C4BB3 /* Settings.swift in Sources */,
+				CAC2594E1F69D825007C4BB3 /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +438,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
+				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
+				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
 				CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */,
 				CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);

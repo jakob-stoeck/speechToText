@@ -49,7 +49,8 @@ class ViewController: UIViewController {
 
     //MARK: Actions
     @IBAction func clear(_ sender: UIBarButtonItem) {
-        Transcript.init(text: NSLocalizedString("main.deleted", value: "(deleted) 👻", comment: "Displayed when text was deleted"))?.save()
+        let text = NSLocalizedString("main.deleted", value: "(deleted) 👻", comment: "Displayed when text was deleted")
+        Transcript.init(text)?.save()
         loadData()
     }
 

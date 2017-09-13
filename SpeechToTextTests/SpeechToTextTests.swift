@@ -29,10 +29,14 @@ class SpeechToTextTests: XCTestCase {
         for resp in responses {
             let transcribed = resp[0]
             let rawJson = resp[1]
-            let googleTranscript = Transcript.init(googleSpeechApiResponse: rawJson.data(using: .utf8)!)
+            let googleTranscript = SpeechRecognizer.parseGoogleResponse(rawJson.data(using: .utf8)!)
             XCTAssertNotNil(googleTranscript)
-            XCTAssertEqual(transcribed, googleTranscript!.text)
+            XCTAssertEqual(transcribed, googleTranscript!)
         }
+
+        let emptyResponse = "{}"
+        let googleTranscript = SpeechRecognizer.parseGoogleResponse(emptyResponse.data(using: .utf8)!)
+        XCTAssertNil(googleTranscript)
     }
 
     func testLanguage() {
@@ -42,6 +46,6 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de-US", values: codes))
         XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de_US", values: codes))
         XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de", values: codes))
-        XCTAssertEqual("en-US", Settings.getNormalizedLanguage(code: "asdf", values: codes))
+        XCTAssertNil(Settings.getNormalizedLanguage(code: "asdf", values: codes))
     }
 }
