@@ -15,7 +15,8 @@ import os.log
 class SpeechRecognizer {
 
     class func recognizeFile(url: URL, completionHandler: @escaping (Transcript) -> ()) {
-        let googleFormats = ["opus", "flac"]
+        os_log("voice file url: %@", log: OSLog.default, type: .debug, url.absoluteString)
+        let googleFormats = ["opus", "flac", "ogg"]
         // let appleFormats = ["aac", "adts", "ac3", "aif", "aiff", "aifc", "caf", "mp3", "mp4", "m4a", "snd", "au", "sd2", "wav"]
 
         if googleFormats.contains(url.pathExtension) {
@@ -65,13 +66,24 @@ class SpeechRecognizer {
             Util.errorHandler(NSLocalizedString("speech.google.toobig", value: "File too big", comment: "Audio file is too big"))
         }
 
+        let suffixToEncoding = [
+            "ogg": "OGG_OPUS",
+            "opus": "OGG_OPUS",
+            "flac": "FLAC",
+        ]
+
+        guard let audioCode = suffixToEncoding[url.pathExtension] else {
+            Util.errorHandler(NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+            return
+        }
+
         let data = [
             "audio": [
                 "content": audioContent
             ],
             "config": [
                 "languageCode": Settings.getLanguage(),
-                "encoding": "OGG_OPUS",
+                "encoding": audioCode,
                 "sampleRateHertz": 16000
             ]
         ]
@@ -87,7 +99,10 @@ class SpeechRecognizer {
         }
         os_log("asking google", log: OSLog.default, type: .debug)
         // there is a streaming API which might be faster than waiting to upload everything
-        let key = getCloudSpeechApiKey()
+        guard let key = getCloudSpeechApiKey() else {
+            Util.errorHandler(NSLocalizedString("speech.google.cloudkey", value: "Cloud key not found", comment: "Google Cloud Key was not configured in the app"))
+            return
+        }
         Util.post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
             let text = parseGoogleResponse($0)
             guard let transcript = Transcript.init(text!) else {
@@ -120,8 +135,8 @@ class SpeechRecognizer {
         }
     }
 
-    class func getCloudSpeechApiKey() -> String {
-        return Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as! String
+    class func getCloudSpeechApiKey() -> String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as? String
     }
 
 }

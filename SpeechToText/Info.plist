@@ -48,5 +48,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CloudSpeechApiKey</key>
+	<string>AIzaSyBfLWNF5Ygz2s9MQDNBWK9pY8ZdcAcj2x4</string>
 </dict>
 </plist>

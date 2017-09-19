@@ -24,7 +24,7 @@ class Util {
                 os_log("%@", log: OSLog.default, type: .error, err.debugDescription)
             }
             if data != nil {
-                os_log("%@", log: OSLog.default, type: .debug, (String(data: data!, encoding: .utf8)!))
+                os_log("HTTP response: %@", log: OSLog.default, type: .debug, (String(data: data!, encoding: .utf8)!))
                 completionHandler(data!)
             }
             }.resume()

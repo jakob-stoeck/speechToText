@@ -48,4 +48,25 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertEqual("de-DE", Settings.getNormalizedLanguage(code: "de", values: codes))
         XCTAssertNil(Settings.getNormalizedLanguage(code: "asdf", values: codes))
     }
+
+    func testRecognition() {
+        let bundle = Bundle(for: type(of: self))
+        struct audioTest {
+            var url:URL
+            var text:String
+        }
+        let audioFiles = [
+            audioTest(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test"),
+            audioTest(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris"),
+            audioTest(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala")
+        ]
+        for audio in audioFiles {
+            let expectation = self.expectation(description: audio.url.absoluteString)
+            SpeechRecognizer.recognizeFile(url: audio.url) { transcript in
+                XCTAssertEqual(audio.text, transcript.text)
+                expectation.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 }

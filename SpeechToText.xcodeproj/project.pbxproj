@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B01F7104E2005CAA48 /* test.m4a */; };
+		CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B11F7104E2005CAA48 /* test.ogg */; };
+		CA20C7B51F7104E2005CAA48 /* test.opus in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B21F7104E2005CAA48 /* test.opus */; };
 		CA35C93E1F5EF551004B5A32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9401F5EF551004B5A32 /* Localizable.strings */; };
 		CA35C9491F5EF552004B5A32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C94B1F5EF552004B5A32 /* InfoPlist.strings */; };
 		CA35C9531F5EF9CF004B5A32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9551F5EF9CF004B5A32 /* Localizable.strings */; };
@@ -73,6 +76,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA20C7B01F7104E2005CAA48 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
+		CA20C7B11F7104E2005CAA48 /* test.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.ogg; sourceTree = "<group>"; };
+		CA20C7B21F7104E2005CAA48 /* test.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.opus; sourceTree = "<group>"; };
 		CA35C93F1F5EF551004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CA35C9461F5EF552004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CA35C94A1F5EF552004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -135,6 +141,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA20C7AF1F7104E2005CAA48 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				CA20C7B01F7104E2005CAA48 /* test.m4a */,
+				CA20C7B11F7104E2005CAA48 /* test.ogg */,
+				CA20C7B21F7104E2005CAA48 /* test.opus */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		CAAEE40C1EC1CDEE00292860 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +195,7 @@
 		CAAEE42C1EC1CDEF00292860 /* SpeechToTextTests */ = {
 			isa = PBXGroup;
 			children = (
+				CA20C7AF1F7104E2005CAA48 /* audio */,
 				CAAEE42D1EC1CDEF00292860 /* SpeechToTextTests.swift */,
 				CAAEE42F1EC1CDEF00292860 /* Info.plist */,
 			);
@@ -367,6 +384,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
+				CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */,
+				CA20C7B51F7104E2005CAA48 /* test.opus in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
