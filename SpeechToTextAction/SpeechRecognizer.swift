@@ -114,14 +114,24 @@ class SpeechRecognizer {
     }
 
     class func parseGoogleResponse(_ data: Data) -> String? {
-        guard let parsed = try? JSONSerialization.jsonObject(with: data) as! [String:[[String:[[String:Any]]]]] else {
+        guard let parsed = try? JSONSerialization.jsonObject(with: data) else {
             return nil
         }
-        if parsed.isEmpty {
+        guard let result = parsed as? [String: Any] else {
             return nil
         }
+        if result.isEmpty {
+            return nil
+        }
+        guard let results = result["results"] as? [[String:[[String:Any]]]] else {
+            if let error = result["error"] as? [String:Any] {
+                return error["message"] as? String
+            }
+            return nil
+        }
+
         // the result may be split in multiple arrays. take the first alternative of each array and concatenate the sentences
-        let text = (parsed["results"]!).flatMap {
+        let text = (results).flatMap {
             $0["alternatives"]![0]["transcript"] as? String
             }.joined(separator: "")
         return text

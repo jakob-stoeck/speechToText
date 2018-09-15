@@ -16,6 +16,8 @@
 		CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */; };
+		CAA706672157F4D500E08CEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CAA706662157F4D500E08CEA /* Config.xcconfig */; };
+		CAA706682157F4D500E08CEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CAA706662157F4D500E08CEA /* Config.xcconfig */; };
 		CAA9CE461F5FF84A0044AF54 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
 		CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */; };
 		CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE41A1EC1CDEF00292860 /* ViewController.swift */; };
@@ -85,6 +87,7 @@
 		CA35C9541F5EF9CF004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CA52DEC61F0B766000D96FEC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CA6C1ACC1F5EEE1C003A97FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		CAA706662157F4D500E08CEA /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
 		CAA9CE451F5FF84A0044AF54 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CAAEE4151EC1CDEF00292860 /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		CAAEE40C1EC1CDEE00292860 = {
 			isa = PBXGroup;
 			children = (
+				CAA706662157F4D500E08CEA /* Config.xcconfig */,
 				CAAEE4171EC1CDEF00292860 /* SpeechToText */,
 				CAAEE42C1EC1CDEF00292860 /* SpeechToTextTests */,
 				CAAEE4371EC1CDEF00292860 /* SpeechToTextUITests */,
@@ -376,6 +380,7 @@
 				CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */,
 				CAAEE4231EC1CDEF00292860 /* LaunchScreen.storyboard in Resources */,
 				CAAEE4201EC1CDEF00292860 /* Assets.xcassets in Resources */,
+				CAA706672157F4D500E08CEA /* Config.xcconfig in Resources */,
 				CAAEE41E1EC1CDEF00292860 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAA706682157F4D500E08CEA /* Config.xcconfig in Resources */,
 				CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */,
 				CA35C9531F5EF9CF004B5A32 /* Localizable.strings in Resources */,
 				CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */,
@@ -521,6 +527,7 @@
 /* Begin XCBuildConfiguration section */
 		CAAEE43B1EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA706662157F4D500E08CEA /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -550,6 +557,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -576,11 +584,13 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		CAAEE43C1EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA706662157F4D500E08CEA /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -610,6 +620,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -629,6 +640,7 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

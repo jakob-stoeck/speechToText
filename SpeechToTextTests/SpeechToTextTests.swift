@@ -39,6 +39,13 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertNil(googleTranscript)
     }
 
+    func testGoogleResponseErrorHandles() {
+        let responseRawJson = "{\"error\": {\"code\": 403, \"message\": \"This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\", \"status\": \"PERMISSION_DENIED\", \"details\": [{\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developer console API key\", \"url\": \"https://console.developers.google.com/project/1/apiui/credential\"} ] }, {\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developers console billing\", \"url\": \"https://console.developers.google.com/billing/enable?project=1\"} ] } ] } }"
+        let googleTranscript = SpeechRecognizer.parseGoogleResponse(responseRawJson.data(using: .utf8)!)
+        XCTAssertNotNil(googleTranscript)
+        XCTAssertEqual("This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.", googleTranscript!)
+    }
+
     func testLanguage() {
         XCTAssertEqual("en", Settings.getLanguagePart("en-US"))
         XCTAssertEqual("en", Settings.getLanguagePart("en"))
@@ -50,6 +57,8 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testRecognition() {
+        Settings.defaults.set("de-DE", forKey: Settings.languagePrefKey)
+        XCTAssertEqual("de-DE", Settings.getLanguage())
         let bundle = Bundle(for: type(of: self))
         struct audioTest {
             var url:URL
@@ -67,6 +76,7 @@ class SpeechToTextTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10)
+        Settings.setDefaultLanguage()
     }
 }
