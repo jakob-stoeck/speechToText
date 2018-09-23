@@ -18,6 +18,7 @@ class Util {
         request.httpMethod = "POST"
         request.httpBody = data
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         let session = URLSession.shared
         session.dataTask(with: request) {data, response, err in
             if err != nil {

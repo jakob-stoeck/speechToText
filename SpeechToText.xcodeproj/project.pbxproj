@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
+		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
 		CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B01F7104E2005CAA48 /* test.m4a */; };
 		CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B11F7104E2005CAA48 /* test.ogg */; };
 		CA20C7B51F7104E2005CAA48 /* test.opus in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B21F7104E2005CAA48 /* test.opus */; };
@@ -78,6 +80,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05A1936B21580BB900B2199F /* twominsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = twominsofsilence.ogg; sourceTree = "<group>"; };
+		05A1936D2158160500B2199F /* 59secondsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59secondsofsilence.ogg; sourceTree = "<group>"; };
 		CA20C7B01F7104E2005CAA48 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		CA20C7B11F7104E2005CAA48 /* test.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.ogg; sourceTree = "<group>"; };
 		CA20C7B21F7104E2005CAA48 /* test.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.opus; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		CA20C7AF1F7104E2005CAA48 /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				05A1936D2158160500B2199F /* 59secondsofsilence.ogg */,
+				05A1936B21580BB900B2199F /* twominsofsilence.ogg */,
 				CA20C7B01F7104E2005CAA48 /* test.m4a */,
 				CA20C7B11F7104E2005CAA48 /* test.ogg */,
 				CA20C7B21F7104E2005CAA48 /* test.opus */,
@@ -310,7 +316,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Jakob Stoeck";
 				TargetAttributes = {
 					CAAEE4141EC1CDEE00292860 = {
@@ -389,9 +395,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */,
 				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
 				CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */,
 				CA20C7B51F7104E2005CAA48 /* test.opus in Resources */,
+				05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +549,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -548,6 +557,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -604,6 +614,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -611,6 +622,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

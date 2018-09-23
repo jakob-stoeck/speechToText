@@ -20,20 +20,26 @@ class SpeechToTextTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
-    func testGoogleResponseInitializationSucceeds() {
-        let responses = [
-                ["abcdef", "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"],
-                ["viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe", "{\"results\": [{\"alternatives\": [{\"transcript\": \"viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe\",\"confidence\": 0.9414088}]}]}"],
-        ]
-        for resp in responses {
-            let transcribed = resp[0]
-            let rawJson = resp[1]
-            let googleTranscript = SpeechRecognizer.parseGoogleResponse(rawJson.data(using: .utf8)!)
-            XCTAssertNotNil(googleTranscript)
-            XCTAssertEqual(transcribed, googleTranscript!)
-        }
-
+    
+    func testGoogleResponseWithDifferentConfidences() {
+        let rawJson = "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"
+        let transcribed = "abcdef"
+        assertGoogleResponseInitEquals(rawJson: rawJson, transcribed: transcribed)
+    }
+    
+    func testGoogleResponseWithOneConfidence() {
+        let rawJson = "{\"results\": [{\"alternatives\": [{\"transcript\": \"viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe\",\"confidence\": 0.9414088}]}]}"
+        let transcribed = "viel Spaß beim Blutspenden früher habe ich das ganz oft gemacht bestimmt jeden Monat einmal oder so als ich noch in Dresden gewohnt habe"
+        assertGoogleResponseInitEquals(rawJson: rawJson, transcribed: transcribed)
+    }
+    
+    func assertGoogleResponseInitEquals(rawJson: String, transcribed: String) {
+        let googleTranscript = SpeechRecognizer.parseGoogleResponse(rawJson.data(using: .utf8)!)
+        XCTAssertNotNil(googleTranscript)
+        XCTAssertEqual(transcribed, googleTranscript!)
+    }
+    
+    func testGoogleEmptyResponse() {
         let emptyResponse = "{}"
         let googleTranscript = SpeechRecognizer.parseGoogleResponse(emptyResponse.data(using: .utf8)!)
         XCTAssertNil(googleTranscript)
@@ -42,8 +48,9 @@ class SpeechToTextTests: XCTestCase {
     func testGoogleResponseErrorHandles() {
         let responseRawJson = "{\"error\": {\"code\": 403, \"message\": \"This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\", \"status\": \"PERMISSION_DENIED\", \"details\": [{\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developer console API key\", \"url\": \"https://console.developers.google.com/project/1/apiui/credential\"} ] }, {\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developers console billing\", \"url\": \"https://console.developers.google.com/billing/enable?project=1\"} ] } ] } }"
         let googleTranscript = SpeechRecognizer.parseGoogleResponse(responseRawJson.data(using: .utf8)!)
+        let shouldBeTranscribed = "This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry."
         XCTAssertNotNil(googleTranscript)
-        XCTAssertEqual("This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.", googleTranscript!)
+        XCTAssertEqual(shouldBeTranscribed, googleTranscript!)
     }
 
     func testLanguage() {
@@ -56,27 +63,49 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertNil(Settings.getNormalizedLanguage(code: "asdf", values: codes))
     }
 
-    func testRecognition() {
-        Settings.defaults.set("de-DE", forKey: Settings.languagePrefKey)
-        XCTAssertEqual("de-DE", Settings.getLanguage())
-        let bundle = Bundle(for: type(of: self))
-        struct audioTest {
-            var url:URL
-            var text:String
+    func testSetLanguageWorks() {
+        let formerLanguage = Settings.getLanguage()
+        let language = "de-DE"
+        Settings.defaults.set(language, forKey: Settings.languagePrefKey)
+        XCTAssertEqual(language, Settings.getLanguage())
+        Settings.setDefaultLanguage()
+        XCTAssertEqual(formerLanguage, Settings.getLanguage())
+    }
+    
+    func assertTranscriptEquals(url: URL, text: String, language: String) {
+        Settings.defaults.set(language, forKey: Settings.languagePrefKey)
+        let expectation = self.expectation(description: url.absoluteString)
+        SpeechRecognizer.recognizeFile(url: url) { transcript in
+            XCTAssertEqual(text, transcript.text)
+            expectation.fulfill()
         }
-        let audioFiles = [
-            audioTest(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test"),
-            audioTest(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris"),
-            audioTest(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala")
-        ]
-        for audio in audioFiles {
-            let expectation = self.expectation(description: audio.url.absoluteString)
-            SpeechRecognizer.recognizeFile(url: audio.url) { transcript in
-                XCTAssertEqual(audio.text, transcript.text)
-                expectation.fulfill()
-            }
-        }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 30)
         Settings.setDefaultLanguage()
     }
+    
+    func testRecognitionOgg() {
+        let bundle = Bundle(for: type(of: self))
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE")
+    }
+    
+    func testRecognitionOpus() {
+        let bundle = Bundle(for: type(of: self))
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris", language: "de-DE")
+    }
+    
+    func testRecognitionM4a() {
+        let bundle = Bundle(for: type(of: self))
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala", language: "de-DE")
+    }
+
+//    func testRecognitionOfTwoMinuteFileOgg() {
+//        let bundle = Bundle(for: type(of: self))
+//        assertTranscriptEquals(url: bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!, text: "", language: "de-DE")
+//    }
+//
+//    func testRecognitionOfupToOneMinuteFileOgg() {
+//        let bundle = Bundle(for: type(of: self))
+//        assertTranscriptEquals(url: bundle.url(forResource: "59secondsofsilence", withExtension: "ogg")!, text: "", language: "de-DE")
+//    }
+    
 }
