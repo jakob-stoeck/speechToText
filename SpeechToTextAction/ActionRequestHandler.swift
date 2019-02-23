@@ -22,7 +22,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             // filter the correct data type out of the received objects and send it to the callback function
             for item in context.inputItems as! [NSExtensionItem] {
                 if let attachments = item.attachments {
-                    for itemProvider in attachments as! [NSItemProvider] {
+                    for itemProvider in attachments {
                         if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypeURL)) {
                             itemProvider.loadItem(forTypeIdentifier: String(kUTTypeURL), options: nil) { (item, error) in
                                 if error != nil {

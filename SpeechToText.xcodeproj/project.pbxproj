@@ -18,8 +18,6 @@
 		CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA52DEC61F0B766000D96FEC /* Settings.bundle */; };
 		CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE41F1EC1CDEF00292860 /* Assets.xcassets */; };
-		CAA706672157F4D500E08CEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CAA706662157F4D500E08CEA /* Config.xcconfig */; };
-		CAA706682157F4D500E08CEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CAA706662157F4D500E08CEA /* Config.xcconfig */; };
 		CAA9CE461F5FF84A0044AF54 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
 		CAAEE4191EC1CDEF00292860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */; };
 		CAAEE41B1EC1CDEF00292860 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE41A1EC1CDEF00292860 /* ViewController.swift */; };
@@ -316,13 +314,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Jakob Stoeck";
 				TargetAttributes = {
 					CAAEE4141EC1CDEE00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 5SCE44WH8R;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -332,20 +330,20 @@
 					};
 					CAAEE4281EC1CDEF00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CAAEE4141EC1CDEE00292860;
 					};
 					CAAEE4331EC1CDEF00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CAAEE4141EC1CDEE00292860;
 					};
 					CAAEE46E1EC22F7A00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 5SCE44WH8R;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -386,7 +384,6 @@
 				CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */,
 				CAAEE4231EC1CDEF00292860 /* LaunchScreen.storyboard in Resources */,
 				CAAEE4201EC1CDEF00292860 /* Assets.xcassets in Resources */,
-				CAA706672157F4D500E08CEA /* Config.xcconfig in Resources */,
 				CAAEE41E1EC1CDEF00292860 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,7 +411,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA706682157F4D500E08CEA /* Config.xcconfig in Resources */,
 				CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */,
 				CA35C9531F5EF9CF004B5A32 /* Localizable.strings in Resources */,
 				CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */,
@@ -667,8 +663,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -684,8 +680,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -699,8 +695,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Debug;
@@ -714,8 +710,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Release;
@@ -728,8 +724,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Debug;
@@ -742,8 +738,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Release;
@@ -759,8 +755,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -776,8 +772,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

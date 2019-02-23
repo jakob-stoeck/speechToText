@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.loadData()
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) {_ in
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) {_ in
             os_log("app will enter foreground", log: OSLog.default, type: .debug)
             self.loadData()
         }
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         os_log("loading last transcript", log: OSLog.default, type: .debug)
         let lang = Settings.getLanguage()
         let format = NSLocalizedString("main.change_language", value: "Voice language: %@. Tap to change.", comment: "Button title to change language")
-        self.openSettingsButton.setTitle(String.localizedStringWithFormat(format, lang), for: UIControlState.normal)
+        self.openSettingsButton.setTitle(String.localizedStringWithFormat(format, lang), for: UIControl.State.normal)
         let lastMessage = Transcript.getLastMessage()
         if lastMessage == "" {
             lastMessageTextField.text = NSLocalizedString("main.last_message", value: "Your last speech to text message will appear here", comment: "Placeholder when there is no last message yet")
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func openSettings(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
+        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
     }
 }
 

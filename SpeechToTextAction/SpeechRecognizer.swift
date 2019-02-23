@@ -131,7 +131,7 @@ class SpeechRecognizer {
         }
 
         // the result may be split in multiple arrays. take the first alternative of each array and concatenate the sentences
-        let text = (results).flatMap {
+        let text = (results).compactMap {
             $0["alternatives"]![0]["transcript"] as? String
             }.joined(separator: "")
         return text
