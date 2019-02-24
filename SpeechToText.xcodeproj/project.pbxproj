@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		056622ED222200F800D566DE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0546A02B2221CFE50099EFFC /* MainInterface.storyboard */; };
+		057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9551F5EF9CF004B5A32 /* Localizable.strings */; };
+		057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546A0292221CFE50099EFFC /* ActionViewController.swift */; };
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
+		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
+		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
 		CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B01F7104E2005CAA48 /* test.m4a */; };
 		CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B11F7104E2005CAA48 /* test.ogg */; };
 		CA20C7B51F7104E2005CAA48 /* test.opus in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B21F7104E2005CAA48 /* test.opus */; };
@@ -26,7 +31,6 @@
 		CAAEE4231EC1CDEF00292860 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAAEE4211EC1CDEF00292860 /* LaunchScreen.storyboard */; };
 		CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE42D1EC1CDEF00292860 /* SpeechToTextTests.swift */; };
 		CAAEE4391EC1CDEF00292860 /* SpeechToTextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */; };
-		CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */; };
 		CAAEE4781EC22F7A00292860 /* SpeechToTextAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */; };
 		CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2594B1F69C954007C4BB3 /* Util.swift */; };
@@ -78,8 +82,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0546A0292221CFE50099EFFC /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		0546A02C2221CFE50099EFFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		056622EC2221FEA100D566DE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		0598AC572221F6DA006DD000 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A1936B21580BB900B2199F /* twominsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = twominsofsilence.ogg; sourceTree = "<group>"; };
 		05A1936D2158160500B2199F /* 59secondsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59secondsofsilence.ogg; sourceTree = "<group>"; };
+		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
+		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		CA20C7B01F7104E2005CAA48 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		CA20C7B11F7104E2005CAA48 /* test.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.ogg; sourceTree = "<group>"; };
 		CA20C7B21F7104E2005CAA48 /* test.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.opus; sourceTree = "<group>"; };
@@ -105,8 +115,6 @@
 		CAAEE4381EC1CDEF00292860 /* SpeechToTextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextUITests.swift; sourceTree = "<group>"; };
 		CAAEE43A1EC1CDEF00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAAEE46F1EC22F7A00292860 /* SpeechToTextAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpeechToTextAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
-		CAAEE4751EC22F7A00292860 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABF826E1ECED84700065A08 /* SpeechToText.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToText.entitlements; sourceTree = "<group>"; };
 		CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpeechToTextAction.entitlements; sourceTree = "<group>"; };
 		CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
@@ -222,12 +230,15 @@
 		CAAEE4701EC22F7A00292860 /* SpeechToTextAction */ = {
 			isa = PBXGroup;
 			children = (
+				0546A02B2221CFE50099EFFC /* MainInterface.storyboard */,
+				0546A0292221CFE50099EFFC /* ActionViewController.swift */,
 				CA35C9551F5EF9CF004B5A32 /* Localizable.strings */,
 				CABF826F1ECED87800065A08 /* SpeechToTextAction.entitlements */,
-				CAAEE4711EC22F7A00292860 /* ActionRequestHandler.swift */,
-				CAAEE4751EC22F7A00292860 /* Info.plist */,
+				0598AC572221F6DA006DD000 /* Info.plist */,
 				CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */,
+				05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */,
 				CAC2594B1F69C954007C4BB3 /* Util.swift */,
+				05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */,
 			);
 			path = SpeechToTextAction;
 			sourceTree = "<group>";
@@ -313,7 +324,7 @@
 		CAAEE40D1EC1CDEE00292860 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Jakob Stoeck";
 				TargetAttributes = {
@@ -360,6 +371,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = CAAEE40C1EC1CDEE00292860;
 			productRefGroup = CAAEE4161EC1CDEF00292860 /* Products */;
@@ -394,6 +406,7 @@
 			files = (
 				05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */,
 				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
+				057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */,
 				CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */,
 				CA20C7B51F7104E2005CAA48 /* test.opus in Resources */,
 				05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */,
@@ -412,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */,
+				056622ED222200F800D566DE /* MainInterface.storyboard in Resources */,
 				CA35C9531F5EF9CF004B5A32 /* Localizable.strings in Resources */,
 				CA5741AE1EC4A5C800F5CE3C /* Assets.xcassets in Resources */,
 			);
@@ -456,9 +470,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
+				057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */,
 				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
-				CAAEE4721EC22F7A00292860 /* ActionRequestHandler.swift in Sources */,
+				05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */,
+				05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */,
 				CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +500,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0546A02B2221CFE50099EFFC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0546A02C2221CFE50099EFFC /* Base */,
+				056622EC2221FEA100D566DE /* de */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		CA35C9401F5EF551004B5A32 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -658,6 +683,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpeechToText/SpeechToText.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5SCE44WH8R;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -675,6 +701,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpeechToText/SpeechToText.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5SCE44WH8R;
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
