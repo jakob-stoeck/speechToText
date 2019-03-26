@@ -10,9 +10,9 @@ import UIKit
 
 protocol SpeechRecognizer {
 
-    static func supports(url: URL) -> Bool
+    func supports(url: URL) -> Bool
     
-    static func recognize(
+    func recognize(
         url: URL,
         lang: String,
         onUpdate: @escaping (String) -> (),

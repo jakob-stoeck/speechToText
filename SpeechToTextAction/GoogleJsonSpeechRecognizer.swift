@@ -13,12 +13,14 @@ import os.log
 
 class GoogleJsonSpeechRecognizer: SpeechRecognizer {
     
-    class func supports(url: URL) -> Bool {
+    static let sharedInstance = GoogleJsonSpeechRecognizer()
+    
+    func supports(url: URL) -> Bool {
         let supportedFormats = ["opus", "flac", "ogg"]
         return supportedFormats.contains(url.pathExtension)
     }
     
-    class func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
+    func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
         guard let audioContent = try? Data(contentsOf: url).base64EncodedString() else {
             return onError(NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
         }
@@ -62,7 +64,7 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
             return onError(NSLocalizedString("speech.google.cloudkey", value: "Cloud key not found", comment: "Google Cloud Key was not configured in the app"))
         }
         Util.post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
-            let text = parseGoogleResponse($0)
+            let text = self.parseGoogleResponse($0)
             guard let transcript = Transcript.init(text!) else {
                 return onError(NSLocalizedString("speech.google.response", value: "Response invalid", comment: "Google response is in an unknown format"))
             }
@@ -70,7 +72,7 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
         }
     }
     
-    class func parseGoogleResponse(_ data: Data) -> String? {
+    func parseGoogleResponse(_ data: Data) -> String? {
         guard let parsed = try? JSONSerialization.jsonObject(with: data) else {
             return nil
         }
@@ -94,7 +96,7 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
         return text
     }
 
-    class func getCloudSpeechApiKey() -> String? {
+    func getCloudSpeechApiKey() -> String? {
         return Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as? String
     }
 

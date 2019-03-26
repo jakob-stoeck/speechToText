@@ -14,12 +14,14 @@ import os.log
 
 class AppleSpeechRecognizer: SpeechRecognizer {
     
-    class func supports(url: URL) -> Bool {
+    static let sharedInstance = AppleSpeechRecognizer()
+    
+    func supports(url: URL) -> Bool {
         let supportedFormats = ["aac", "adts", "ac3", "aif", "aiff", "aifc", "caf", "mp3", "mp4", "m4a", "snd", "au", "sd2", "wav"]
         return supportedFormats.contains(url.pathExtension)
     }
     
-    static func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
+    func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
         askPermission()
         let localeID = lang.replacingOccurrences(of: "-", with: "_")
         guard let recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: localeID)) else {
@@ -46,7 +48,7 @@ class AppleSpeechRecognizer: SpeechRecognizer {
         }
     }
     
-    class func askPermission() {
+    func askPermission() {
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
             if authStatus != .authorized {
                 Util.errorHandler(NSLocalizedString("speech.apple.unauthorized", value: "Speech recognition was not authorized", comment: "Apple SR was unauthorized"))

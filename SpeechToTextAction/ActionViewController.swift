@@ -20,7 +20,7 @@ class ActionViewController: UIViewController {
             body: NSLocalizedString("action.loading_body", value: "Please wait a moment", comment: "Notification body while transcription in progress")
         )
         
-        let candidates: [SpeechRecognizer.Type] = [ GoogleJsonSpeechRecognizer.self, AppleSpeechRecognizer.self ]
+        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleJsonSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
         guard let best = candidates.first(where: { $0.supports(url: url) }) else {
             return Util.errorHandler("No suitable speech recognizer found")
         }

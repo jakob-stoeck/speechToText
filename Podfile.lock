@@ -1,0 +1,85 @@
+PODS:
+  - "!ProtoCompiler (3.6.1)":
+    - Protobuf (~> 3.0)
+  - "!ProtoCompiler-gRPCPlugin (1.19.0)":
+    - "!ProtoCompiler (= 3.6.1)"
+    - gRPC-ProtoRPC (= 1.19.0)
+  - BoringSSL-GRPC (0.0.3):
+    - BoringSSL-GRPC/Implementation (= 0.0.3)
+    - BoringSSL-GRPC/Interface (= 0.0.3)
+  - BoringSSL-GRPC/Implementation (0.0.3):
+    - BoringSSL-GRPC/Interface (= 0.0.3)
+  - BoringSSL-GRPC/Interface (0.0.3)
+  - googleapis (0.0.1):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
+    - googleapis/Messages (= 0.0.1)
+    - googleapis/Services (= 0.0.1)
+  - googleapis/Messages (0.0.1):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
+    - Protobuf
+  - googleapis/Services (0.0.1):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
+    - googleapis/Messages
+    - gRPC-ProtoRPC
+  - gRPC (1.19.0):
+    - gRPC-RxLibrary (= 1.19.0)
+    - gRPC/Main (= 1.19.0)
+  - gRPC-Core (1.19.0):
+    - gRPC-Core/Implementation (= 1.19.0)
+    - gRPC-Core/Interface (= 1.19.0)
+  - gRPC-Core/Implementation (1.19.0):
+    - BoringSSL-GRPC (= 0.0.3)
+    - gRPC-Core/Interface (= 1.19.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.19.0)
+  - gRPC-ProtoRPC (1.19.0):
+    - gRPC-ProtoRPC/Main (= 1.19.0)
+  - gRPC-ProtoRPC/Main (1.19.0):
+    - gRPC (= 1.19.0)
+    - gRPC-RxLibrary (= 1.19.0)
+    - Protobuf (~> 3.0)
+  - gRPC-RxLibrary (1.19.0)
+  - gRPC/Main (1.19.0):
+    - gRPC-Core (= 1.19.0)
+    - gRPC-RxLibrary (= 1.19.0)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - Protobuf (3.6.1)
+
+DEPENDENCIES:
+  - googleapis (from `.`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - "!ProtoCompiler"
+    - "!ProtoCompiler-gRPCPlugin"
+    - BoringSSL-GRPC
+    - gRPC
+    - gRPC-Core
+    - gRPC-ProtoRPC
+    - gRPC-RxLibrary
+    - nanopb
+    - Protobuf
+
+EXTERNAL SOURCES:
+  googleapis:
+    :path: "."
+
+SPEC CHECKSUMS:
+  "!ProtoCompiler": 5d6b6dcd2d0940aed49642c9af962bff532da096
+  "!ProtoCompiler-gRPCPlugin": 433d3331aebb1a4756b8fef6d78655cb3e4ea91c
+  BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  googleapis: aca6318130c96d3f627ec57af5eb3c9f1dbcf963
+  gRPC: 77d2866b3ce1e187b2239d8adba48b98d9524c15
+  gRPC-Core: bd9472c8daa2e414b9f8038ba667bf56ce0e02b8
+  gRPC-ProtoRPC: cc498c1885e75a1fb6b892881b440707f131fb5e
+  gRPC-RxLibrary: 562e2a6d12137d15dfb93bbf652bd3f638e3eb8a
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+
+PODFILE CHECKSUM: cb3ce83f8cf8c49fbc0aa4ac4ea2db4e07bf3896
+
+COCOAPODS: 1.6.1
