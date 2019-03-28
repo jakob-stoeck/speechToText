@@ -30,7 +30,12 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         return supportedFormats.contains(url.pathExtension)
     }
     
+    private var lang : String = "en-US"
+    private var format : String = "en-US"
+    
     func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
+        
+        self.lang = lang
         
         // We recommend sending samples in 100ms chunks
         let chunkSize : Int /* bytes/chunk */ = Int(0.1 /* seconds/chunk */
@@ -43,30 +48,42 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         }
         let chunks = audioData.count/chunkSize + (audioData.count % chunkSize == 0 ? 0 : 1)
         
+        func onAudioChunk(response: StreamingRecognizeResponse?, error: NSError?) {
+            if let error = error {
+                self.stopStreaming()
+                onError(error.localizedDescription)
+            } else if let response = response {
+                // while updating, only take the first result, as the others are still likely to change
+                var text = ""
+                var final = false
+                // on end take the whole result
+                for result in response.resultsArray! {
+                    guard let result = result as? StreamingRecognitionResult else {
+                        return
+                    }
+                    guard let alternative = result.alternativesArray[0] as? SpeechRecognitionAlternative else {
+                        return
+                    }
+                    text += alternative.transcript
+                    final = result.isFinal || final
+                }
+
+                onUpdate(text)
+
+                if final {
+                    self.stopStreaming()
+                    onEnd(text)
+                }
+            }
+        }
+        
+        startStreaming(completion: onAudioChunk)
+        
         for i in 0..<chunks {
             let currentIndex = i*chunkSize
             let range = currentIndex..<min(currentIndex+chunkSize, audioData.count)
             let chunk = audioData.subdata(in: range)
-            
-            DispatchQueue.main.async {
-                self.streamAudioData(chunk, lang: lang, completion: { (response, error) in
-                    if let error = error {
-                        self.stopStreaming()
-                        return onError(error.localizedDescription)
-                    } else if let response = response {
-                        for result in response.resultsArray! {
-                            if let result = result as? StreamingRecognitionResult {
-                                let text:String = (result.alternativesArray[0] as! SpeechRecognitionAlternative).transcript
-                                onUpdate(text)
-                                if result.isFinal {
-                                    self.stopStreaming()
-                                    onEnd(text)
-                                }
-                            }
-                        }
-                    }
-                })
-            }
+            self.streamAudioData(chunk)
         }
     }
     
@@ -80,46 +97,44 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     
     static let sharedInstance = GoogleStreamingSpeechRecognizer()
     
-    func streamAudioData(_ audioData: Data, lang: String, completion: @escaping SpeechRecognitionCompletionHandler) {
-        if (!streaming) {
-            // if we aren't already streaming, set up a gRPC connection
-            client = Speech(host:HOST)
-            writer = GRXBufferedPipe()
-            call = client.rpcToStreamingRecognize(withRequestsWriter: writer,
-                                                  eventHandler:
-                { (done, response, error) in
-                    completion(response, error as NSError?)
-            })
-            // authenticate using an API key obtained from the Google Cloud Console
-            call.requestHeaders.setObject(NSString(string:API_KEY),
-                                          forKey:NSString(string:"X-Goog-Api-Key"))
-            // if the API key has a bundle ID restriction, specify the bundle ID like this
-            call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!),
-                                          forKey:NSString(string:"X-Ios-Bundle-Identifier"))
-            
-            call.start()
-            streaming = true
-            
-            // send an initial request message to configure the service
-            let recognitionConfig = RecognitionConfig()
-            // FIXME: language and encoding should be instance variables
-            recognitionConfig.encoding = .oggOpus
-            recognitionConfig.sampleRateHertz = Int32(sampleRate)
-            recognitionConfig.languageCode = lang
-            recognitionConfig.maxAlternatives = 0
-            recognitionConfig.enableWordTimeOffsets = true
-            
-            let streamingRecognitionConfig = StreamingRecognitionConfig()
-            streamingRecognitionConfig.config = recognitionConfig
-            streamingRecognitionConfig.singleUtterance = false
-            streamingRecognitionConfig.interimResults = true
-            
-            let streamingRecognizeRequest = StreamingRecognizeRequest()
-            streamingRecognizeRequest.streamingConfig = streamingRecognitionConfig
-            
-            writer.writeValue(streamingRecognizeRequest)
-        }
+    func startStreaming(completion: @escaping SpeechRecognitionCompletionHandler) {
+        // set up a gRPC connection
+        client = Speech(host:HOST)
+        writer = GRXBufferedPipe()
+        call = client.rpcToStreamingRecognize(withRequestsWriter: writer, eventHandler: { (done, response, error) in
+            completion(response, error as NSError?)
+        })
+        // authenticate using an API key obtained from the Google Cloud Console
+        call.requestHeaders.setObject(NSString(string:API_KEY),
+                                      forKey:NSString(string:"X-Goog-Api-Key"))
+        // if the API key has a bundle ID restriction, specify the bundle ID like this
+        call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!),
+                                      forKey:NSString(string:"X-Ios-Bundle-Identifier"))
         
+        call.start()
+        streaming = true
+        
+        // send an initial request message to configure the service
+        let recognitionConfig = RecognitionConfig()
+        // FIXME: language and encoding should be instance variables
+        recognitionConfig.encoding = .oggOpus
+        recognitionConfig.sampleRateHertz = Int32(sampleRate)
+        recognitionConfig.languageCode = lang
+        recognitionConfig.maxAlternatives = 0
+        recognitionConfig.enableWordTimeOffsets = true
+        
+        let streamingRecognitionConfig = StreamingRecognitionConfig()
+        streamingRecognitionConfig.config = recognitionConfig
+        streamingRecognitionConfig.singleUtterance = false
+        streamingRecognitionConfig.interimResults = true
+        
+        let streamingRecognizeRequest = StreamingRecognizeRequest()
+        streamingRecognizeRequest.streamingConfig = streamingRecognitionConfig
+        
+        writer.writeValue(streamingRecognizeRequest)
+    }
+    
+    func streamAudioData(_ audioData: Data) {
         // send a request message containing the audio data
         let streamingRecognizeRequest = StreamingRecognizeRequest()
         streamingRecognizeRequest.audioContent = audioData as Data

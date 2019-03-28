@@ -73,13 +73,12 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer) {
-        Settings.defaults.set(language, forKey: Settings.languagePrefKey)
         let expectation = self.expectation(description: url.absoluteString)
         recognizer.recognize(
             url: url,
             lang: language,
             onUpdate: { transcribedText in
-                // test nothing
+                // noop
             },
             onEnd: { transcribedText in
                 XCTAssertEqual(text, transcribedText)
@@ -90,7 +89,6 @@ class SpeechToTextTests: XCTestCase {
             }
         )
         waitForExpectations(timeout: 30)
-        Settings.setDefaultLanguage()
     }
     
     func testRecognitionOgg() {

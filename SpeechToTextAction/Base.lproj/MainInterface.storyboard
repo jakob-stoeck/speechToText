@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,10 +30,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H6R-kM-rAU">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H6R-kM-rAU">
                                 <rect key="frame" x="0.0" y="64" width="302" height="447"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Message appears here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-RJ-MO0">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Message appears here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-RJ-MO0">
                                         <rect key="frame" x="0.0" y="0.0" width="302" height="447"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -41,18 +41,16 @@
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES" calendarEvent="YES"/>
                                     </textView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ytg-RJ-MO0" secondAttribute="bottom" constant="20" symbolic="YES" id="Fl6-TD-YgX"/>
-                                    <constraint firstAttribute="trailing" secondItem="ytg-RJ-MO0" secondAttribute="trailing" constant="20" symbolic="YES" id="Pks-jU-vUm"/>
-                                    <constraint firstItem="ytg-RJ-MO0" firstAttribute="leading" secondItem="H6R-kM-rAU" secondAttribute="leading" constant="20" symbolic="YES" id="Z1Q-ja-lKh"/>
-                                    <constraint firstItem="ytg-RJ-MO0" firstAttribute="top" secondItem="H6R-kM-rAU" secondAttribute="top" constant="20" symbolic="YES" id="f9M-ae-nmy"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="NOA-Dm-cuz" secondAttribute="trailing" id="A05-Pj-hrr"/>
+                            <constraint firstItem="H6R-kM-rAU" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" id="AHn-eC-hFM"/>
+                            <constraint firstItem="H6R-kM-rAU" firstAttribute="leading" secondItem="NOA-Dm-cuz" secondAttribute="leading" id="Ch4-Qf-6e0"/>
                             <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" id="HxO-8t-aoh"/>
+                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="H6R-kM-rAU" secondAttribute="trailing" constant="18" id="aGm-Fg-eFZ"/>
+                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="H6R-kM-rAU" secondAttribute="bottom" constant="17" id="rgu-yA-0ou"/>
                             <constraint firstItem="NOA-Dm-cuz" firstAttribute="top" secondItem="VVe-Uw-JpX" secondAttribute="top" id="we0-1t-bgp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VVe-Uw-JpX"/>
@@ -60,7 +58,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
-                        <outlet property="message" destination="ytg-RJ-MO0" id="ySn-et-DAA"/>
+                        <outlet property="message" destination="ytg-RJ-MO0" id="gRl-Df-utN"/>
                         <outlet property="view" destination="zMn-AG-sqS" id="Qma-de-2ek"/>
                     </connections>
                 </viewController>
