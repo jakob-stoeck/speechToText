@@ -62,7 +62,7 @@ class Util {
 
     class func errorHandler(_ text: String, title: String = NSLocalizedString("util.error.title", value: "Error", comment: "Title of a generic error message")) {
         os_log("%@: %@", log: OSLog.default, type: .error, title, text)
-        notify(title: title, body: text)
+//        notify(title: title, body: text)
     }
 
 }

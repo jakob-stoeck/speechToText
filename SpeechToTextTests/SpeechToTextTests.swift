@@ -34,20 +34,20 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func assertGoogleResponseInitEquals(rawJson: String, transcribed: String) {
-        let googleTranscript = SpeechRecognizer.parseGoogleResponse(rawJson.data(using: .utf8)!)
+        let googleTranscript = GoogleJsonSpeechRecognizer.sharedInstance.parseGoogleResponse(rawJson.data(using: .utf8)!)
         XCTAssertNotNil(googleTranscript)
         XCTAssertEqual(transcribed, googleTranscript!)
     }
     
     func testGoogleEmptyResponse() {
         let emptyResponse = "{}"
-        let googleTranscript = SpeechRecognizer.parseGoogleResponse(emptyResponse.data(using: .utf8)!)
+        let googleTranscript = GoogleJsonSpeechRecognizer.sharedInstance.parseGoogleResponse(emptyResponse.data(using: .utf8)!)
         XCTAssertNil(googleTranscript)
     }
 
     func testGoogleResponseErrorHandles() {
         let responseRawJson = "{\"error\": {\"code\": 403, \"message\": \"This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\", \"status\": \"PERMISSION_DENIED\", \"details\": [{\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developer console API key\", \"url\": \"https://console.developers.google.com/project/1/apiui/credential\"} ] }, {\"@type\": \"type.googleapis.com/google.rpc.Help\", \"links\": [{\"description\": \"Google developers console billing\", \"url\": \"https://console.developers.google.com/billing/enable?project=1\"} ] } ] } }"
-        let googleTranscript = SpeechRecognizer.parseGoogleResponse(responseRawJson.data(using: .utf8)!)
+        let googleTranscript = GoogleJsonSpeechRecognizer.sharedInstance.parseGoogleResponse(responseRawJson.data(using: .utf8)!)
         let shouldBeTranscribed = "This API method requires billing to be enabled. Please enable billing on project #1 by visiting https://console.developers.google.com/billing/enable?project=1 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry."
         XCTAssertNotNil(googleTranscript)
         XCTAssertEqual(shouldBeTranscribed, googleTranscript!)
@@ -72,32 +72,66 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertEqual(formerLanguage, Settings.getLanguage())
     }
     
-    func assertTranscriptEquals(url: URL, text: String, language: String) {
-        Settings.defaults.set(language, forKey: Settings.languagePrefKey)
+    func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer) {
         let expectation = self.expectation(description: url.absoluteString)
-        SpeechRecognizer.recognizeFile(url: url) { transcript in
-            XCTAssertEqual(text, transcript.text)
-            expectation.fulfill()
-        }
+        recognizer.recognize(
+            url: url,
+            lang: language,
+            onUpdate: { transcribedText in
+                // noop
+            },
+            onEnd: { transcribedText in
+                XCTAssertEqual(text, transcribedText)
+                expectation.fulfill()
+            },
+            onError: { errorText in
+                XCTFail(errorText)
+            }
+        )
         waitForExpectations(timeout: 30)
-        Settings.setDefaultLanguage()
     }
     
-    func testRecognitionOgg() {
+    func testRecognitionOggStreaming() {
         let bundle = Bundle(for: type(of: self))
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE")
+        let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE", recognizer: recognizer)
     }
+    
+    func testRecognitionOggSynchronous() {
+        let bundle = Bundle(for: type(of: self))
+        let recognizer = GoogleJsonSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE", recognizer: recognizer)
+    }
+
     
     func testRecognitionOpus() {
         let bundle = Bundle(for: type(of: self))
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris", language: "de-DE")
+        let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris", language: "de-DE", recognizer: recognizer)
     }
     
+    // FIXME: Test fails with recent ios. I think right now, Apple Speech Recognizer are only testable on a real device.
     func testRecognitionM4a() {
         let bundle = Bundle(for: type(of: self))
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala", language: "de-DE")
+        let recognizer = AppleSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala", language: "de-DE", recognizer: recognizer)
     }
 
+    let overOneMinuteText = "hallo guten Morgen Gitti Oma ich habe den Elias auf dem Video gesehen das ist ja unglaublich ich könnte mich so erinnern dass ihr mit 34 Monaten 3 4 Monaten der Kopf hochgehoben habt weiß nicht ob ich das noch richtig in Erinnerung habe aber irgendwas nicht mit einem Ort anderthalb sehr lustig ja ich glaube der muss ja bald aus dem Körbchen raus weil sonst gibt dann vielleicht zu hoch damit der was sieht ne wann sind und schön festhalten auf dem Wickeltisch ich glaube er robbt bald los ist ja der Wahnsinn sehr sportlich sehr beweglich lustig also bis bald achso übrigens die ist aber am Wochenende hier das war auch sehr schön das erste Mal dass mir meine Schwester oder überhaupt eine Schwester ein Brot geschmiert und da musste ich erst 57 werden bis bald ciao"
+    
+    func testRecognitionOpusStreamingOverOneMinute() {
+        let bundle = Bundle(for: type(of: self))
+        let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "overoneminute", withExtension: "opus")!, text: overOneMinuteText, language: "de-DE", recognizer: recognizer)
+    }
+
+    func testRecognitionOpusSynchronuousOverOneMinute() {
+        let bundle = Bundle(for: type(of: self))
+        let recognizer = GoogleJsonSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "overoneminute", withExtension: "opus")!, text: overOneMinuteText, language: "de-DE", recognizer: recognizer)
+    }
+
+    
 //    func testRecognitionOfTwoMinuteFileOgg() {
 //        let bundle = Bundle(for: type(of: self))
 //        assertTranscriptEquals(url: bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!, text: "", language: "de-DE")

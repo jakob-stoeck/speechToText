@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050E0C40224A73D2006CF681 /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
+		050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
+		0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
+		05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
 		056622ED222200F800D566DE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0546A02B2221CFE50099EFFC /* MainInterface.storyboard */; };
 		057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9551F5EF9CF004B5A32 /* Localizable.strings */; };
 		057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546A0292221CFE50099EFFC /* ActionViewController.swift */; };
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
+		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
+		0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */; };
+		162135B2CD07D5E6351788E2 /* Pods_SpeechToTextTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */; };
+		93F9B9C8068157C00F009193 /* Pods_SpeechToText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC372E5180A19E87F864EBD7 /* Pods_SpeechToText.framework */; };
 		CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B01F7104E2005CAA48 /* test.m4a */; };
 		CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B11F7104E2005CAA48 /* test.ogg */; };
 		CA20C7B51F7104E2005CAA48 /* test.opus in Resources */ = {isa = PBXBuildFile; fileRef = CA20C7B21F7104E2005CAA48 /* test.opus */; };
@@ -41,6 +49,7 @@
 		CAE1499E1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 		CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1499D1ECDB5A600162D3E /* Transcript.swift */; };
 		CAFD70081F60176F007862D8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9CE451F5FF84A0044AF54 /* Settings.swift */; };
+		CE70B6A633029FB5F6E875B6 /* Pods_SpeechToTextAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78221CBC1F7B468982C32DEF /* Pods_SpeechToTextAction.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,14 +91,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleStreamingSpeechRecognizer.swift; sourceTree = "<group>"; };
 		0546A0292221CFE50099EFFC /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		0546A02C2221CFE50099EFFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		056622EC2221FEA100D566DE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		0598AC572221F6DA006DD000 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A1936B21580BB900B2199F /* twominsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = twominsofsilence.ogg; sourceTree = "<group>"; };
 		05A1936D2158160500B2199F /* 59secondsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59secondsofsilence.ogg; sourceTree = "<group>"; };
+		05B1293522306D4D000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05B1293722306D70000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D70FD7224FF9C3003587C2 /* overoneminute.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = overoneminute.opus; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
+		102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1449FDC256E9E6E73F250CE5 /* Pods-SpeechToTextUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextUITests.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTextUITests/Pods-SpeechToTextUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3C6F1C4FFA21BCEF4DA30936 /* Pods-SpeechToTextAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextAction.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTextAction/Pods-SpeechToTextAction.release.xcconfig"; sourceTree = "<group>"; };
+		78221CBC1F7B468982C32DEF /* Pods_SpeechToTextAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		858990D0E3E32510BAB5E473 /* Pods-SpeechToTextTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextTests.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTextTests/Pods-SpeechToTextTests.release.xcconfig"; sourceTree = "<group>"; };
+		942C50135532A4252FC7CB41 /* Pods-SpeechToText.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToText.release.xcconfig"; path = "Target Support Files/Pods-SpeechToText/Pods-SpeechToText.release.xcconfig"; sourceTree = "<group>"; };
+		9FFBCF0324B051306B313B05 /* Pods-SpeechToTextTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextTests.debug.xcconfig"; path = "Target Support Files/Pods-SpeechToTextTests/Pods-SpeechToTextTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4090C620CDDED2508D905CD /* Pods-SpeechToTextAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextAction.debug.xcconfig"; path = "Target Support Files/Pods-SpeechToTextAction/Pods-SpeechToTextAction.debug.xcconfig"; sourceTree = "<group>"; };
+		AC372E5180A19E87F864EBD7 /* Pods_SpeechToText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA20C7B01F7104E2005CAA48 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		CA20C7B11F7104E2005CAA48 /* test.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.ogg; sourceTree = "<group>"; };
 		CA20C7B21F7104E2005CAA48 /* test.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.opus; sourceTree = "<group>"; };
@@ -120,6 +142,9 @@
 		CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		CAC2594B1F69C954007C4BB3 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		CAE1499D1ECDB5A600162D3E /* Transcript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transcript.swift; sourceTree = "<group>"; };
+		D699379F43F70F3116FA70BD /* Pods-SpeechToText.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToText.debug.xcconfig"; path = "Target Support Files/Pods-SpeechToText/Pods-SpeechToText.debug.xcconfig"; sourceTree = "<group>"; };
+		E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF163859FE65B122C823CF16 /* Pods-SpeechToTextUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextUITests.debug.xcconfig"; path = "Target Support Files/Pods-SpeechToTextUITests/Pods-SpeechToTextUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93F9B9C8068157C00F009193 /* Pods_SpeechToText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162135B2CD07D5E6351788E2 /* Pods_SpeechToTextTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,17 +176,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE70B6A633029FB5F6E875B6 /* Pods_SpeechToTextAction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3300623805E133B39DB3AF81 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05B1293722306D70000D2C96 /* googleapis.framework */,
+				05B1293522306D4D000D2C96 /* googleapis.framework */,
+				AC372E5180A19E87F864EBD7 /* Pods_SpeechToText.framework */,
+				78221CBC1F7B468982C32DEF /* Pods_SpeechToTextAction.framework */,
+				102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */,
+				E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		62C46D3AB368651A28F02D4B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D699379F43F70F3116FA70BD /* Pods-SpeechToText.debug.xcconfig */,
+				942C50135532A4252FC7CB41 /* Pods-SpeechToText.release.xcconfig */,
+				A4090C620CDDED2508D905CD /* Pods-SpeechToTextAction.debug.xcconfig */,
+				3C6F1C4FFA21BCEF4DA30936 /* Pods-SpeechToTextAction.release.xcconfig */,
+				9FFBCF0324B051306B313B05 /* Pods-SpeechToTextTests.debug.xcconfig */,
+				858990D0E3E32510BAB5E473 /* Pods-SpeechToTextTests.release.xcconfig */,
+				FF163859FE65B122C823CF16 /* Pods-SpeechToTextUITests.debug.xcconfig */,
+				1449FDC256E9E6E73F250CE5 /* Pods-SpeechToTextUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CA20C7AF1F7104E2005CAA48 /* audio */ = {
 			isa = PBXGroup;
 			children = (
 				05A1936D2158160500B2199F /* 59secondsofsilence.ogg */,
 				05A1936B21580BB900B2199F /* twominsofsilence.ogg */,
+				05D70FD7224FF9C3003587C2 /* overoneminute.opus */,
 				CA20C7B01F7104E2005CAA48 /* test.m4a */,
 				CA20C7B11F7104E2005CAA48 /* test.ogg */,
 				CA20C7B21F7104E2005CAA48 /* test.opus */,
@@ -175,6 +233,8 @@
 				CAAEE4371EC1CDEF00292860 /* SpeechToTextUITests */,
 				CAAEE4701EC22F7A00292860 /* SpeechToTextAction */,
 				CAAEE4161EC1CDEF00292860 /* Products */,
+				62C46D3AB368651A28F02D4B /* Pods */,
+				3300623805E133B39DB3AF81 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +297,7 @@
 				0598AC572221F6DA006DD000 /* Info.plist */,
 				CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */,
 				05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */,
+				0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */,
 				CAC2594B1F69C954007C4BB3 /* Util.swift */,
 				05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */,
 			);
@@ -250,10 +311,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAAEE43D1EC1CDEF00292860 /* Build configuration list for PBXNativeTarget "SpeechToText" */;
 			buildPhases = (
+				DB791B09C3601E8E08FA090F /* [CP] Check Pods Manifest.lock */,
 				CAAEE4111EC1CDEE00292860 /* Sources */,
 				CAAEE4121EC1CDEE00292860 /* Frameworks */,
 				CAAEE4131EC1CDEE00292860 /* Resources */,
 				CAAEE4581EC2067600292860 /* Embed App Extensions */,
+				9BB2774B3894108BB1753991 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,6 +332,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAAEE4401EC1CDEF00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextTests" */;
 			buildPhases = (
+				530CB5DD377E8BCA178B930D /* [CP] Check Pods Manifest.lock */,
 				CAAEE4251EC1CDEF00292860 /* Sources */,
 				CAAEE4261EC1CDEF00292860 /* Frameworks */,
 				CAAEE4271EC1CDEF00292860 /* Resources */,
@@ -287,6 +351,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAAEE4431EC1CDEF00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextUITests" */;
 			buildPhases = (
+				76E7F2C6EA2B1F3DF3140C27 /* [CP] Check Pods Manifest.lock */,
 				CAAEE4301EC1CDEF00292860 /* Sources */,
 				CAAEE4311EC1CDEF00292860 /* Frameworks */,
 				CAAEE4321EC1CDEF00292860 /* Resources */,
@@ -305,6 +370,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAAEE4791EC22F7A00292860 /* Build configuration list for PBXNativeTarget "SpeechToTextAction" */;
 			buildPhases = (
+				994D323A156737FF44686188 /* [CP] Check Pods Manifest.lock */,
 				CAAEE46B1EC22F7A00292860 /* Sources */,
 				CAAEE46C1EC22F7A00292860 /* Frameworks */,
 				CAAEE46D1EC22F7A00292860 /* Resources */,
@@ -369,6 +435,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				de,
@@ -404,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */,
 				05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */,
 				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
 				057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */,
@@ -433,6 +501,133 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		530CB5DD377E8BCA178B930D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpeechToTextTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76E7F2C6EA2B1F3DF3140C27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpeechToTextUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		994D323A156737FF44686188 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpeechToTextAction-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BB2774B3894108BB1753991 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpeechToText/Pods-SpeechToText-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/googleapis/googleapis.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/googleapis.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpeechToText/Pods-SpeechToText-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB791B09C3601E8E08FA090F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpeechToText-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CAAEE4111EC1CDEE00292860 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -450,9 +645,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */,
+				05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				CAC259511F69D836007C4BB3 /* Util.swift in Sources */,
+				050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */,
 				CAC2594F1F69D829007C4BB3 /* Settings.swift in Sources */,
+				050E0C40224A73D2006CF681 /* AppleSpeechRecognizer.swift in Sources */,
 				CAC2594E1F69D825007C4BB3 /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +670,7 @@
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
 				057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */,
 				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
+				0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
 				05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */,
 				05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */,
@@ -679,6 +878,7 @@
 		};
 		CAAEE43E1EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D699379F43F70F3116FA70BD /* Pods-SpeechToText.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -697,6 +897,7 @@
 		};
 		CAAEE43F1EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 942C50135532A4252FC7CB41 /* Pods-SpeechToText.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -715,6 +916,7 @@
 		};
 		CAAEE4411EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FFBCF0324B051306B313B05 /* Pods-SpeechToTextTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -730,6 +932,7 @@
 		};
 		CAAEE4421EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 858990D0E3E32510BAB5E473 /* Pods-SpeechToTextTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -745,6 +948,7 @@
 		};
 		CAAEE4441EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF163859FE65B122C823CF16 /* Pods-SpeechToTextUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SpeechToTextUITests/Info.plist;
@@ -759,6 +963,7 @@
 		};
 		CAAEE4451EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1449FDC256E9E6E73F250CE5 /* Pods-SpeechToTextUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SpeechToTextUITests/Info.plist;
@@ -773,6 +978,7 @@
 		};
 		CAAEE47A1EC22F7A00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4090C620CDDED2508D905CD /* Pods-SpeechToTextAction.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Action Icon";
 				CODE_SIGN_ENTITLEMENTS = SpeechToTextAction/SpeechToTextAction.entitlements;
@@ -790,6 +996,7 @@
 		};
 		CAAEE47B1EC22F7A00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C6F1C4FFA21BCEF4DA30936 /* Pods-SpeechToTextAction.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Action Icon";
 				CODE_SIGN_ENTITLEMENTS = SpeechToTextAction/SpeechToTextAction.entitlements;

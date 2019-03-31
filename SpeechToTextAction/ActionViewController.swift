@@ -11,38 +11,33 @@ import MobileCoreServices
 import os.log
 
 class ActionViewController: UIViewController {
-
+    
     @IBOutlet weak var message: UITextView!
     
     func receivedUrl(url: URL) {
-        Util.notify(
-            title: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"),
-            body: NSLocalizedString("action.loading_body", value: "Please wait a moment", comment: "Notification body while transcription in progress")
-        )
+        onTranscription(text: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"))
         
-        let candidates: [SpeechRecognizer.Type] = [ GoogleJsonSpeechRecognizer.self, AppleSpeechRecognizer.self ]
+        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleJsonSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
         guard let best = candidates.first(where: { $0.supports(url: url) }) else {
             return Util.errorHandler("No suitable speech recognizer found")
         }
         
-        OperationQueue.main.addOperation {
-            best.recognize(
-                url: url,
-                lang: Settings.getLanguage(),
-                onUpdate: self.onTranscription,
-                onEnd: self.onTranscription,
-                onError: { error in Util.errorHandler(error) }
-            )
-        }
+        best.recognize(
+            url: url,
+            lang: Settings.getLanguage(),
+            onUpdate: self.onTranscription,
+            onEnd: self.onTranscription,
+            onError: { error in Util.errorHandler(error) }
+        )
     }
     
     func onTranscription(text: String) {
-        Util.notify(
-            title: NSLocalizedString("action.transcript_ready", value: "Speech to text:", comment: "Notification title when transcription is done"),
-            body: text,
-            removePending: true
-        )
-        self.message.text = text
+        os_log("onTranscription: \"%@\"", log: OSLog.default, type: .debug, text)
+        guard let strongMessage = self.message else {
+            return
+        }
+        strongMessage.text = text
+        Transcript(text)?.save()
     }
     
     override func viewDidLoad() {
@@ -51,8 +46,7 @@ class ActionViewController: UIViewController {
         // Get the item[s] we're handling from the extension context.
         // Replace this with something appropriate for the type[s] your extension supports.
         var found = false
-//        let type = kUTTypeURL as String
-        let type = kUTTypeText as String
+        let type = kUTTypeURL as String
         for item in self.extensionContext!.inputItems as! [NSExtensionItem] {
             for provider in item.attachments! {
                 if provider.hasItemConformingToTypeIdentifier(type) {
@@ -60,7 +54,10 @@ class ActionViewController: UIViewController {
                         if error != nil {
                             Util.errorHandler(error as! String)
                         }
-                        return self.receivedUrl(url: item as! URL)
+                        DispatchQueue.main.async {
+                            self.receivedUrl(url: item as! URL)
+                        }
+                        return
                     }
                     found = true
                     break
