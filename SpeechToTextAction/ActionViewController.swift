@@ -37,6 +37,7 @@ class ActionViewController: UIViewController {
             return
         }
         strongMessage.text = text
+        Transcript(text)?.save()
     }
     
     override func viewDidLoad() {
@@ -46,7 +47,6 @@ class ActionViewController: UIViewController {
         // Replace this with something appropriate for the type[s] your extension supports.
         var found = false
         let type = kUTTypeURL as String
-//        let type = kUTTypeText as String
         for item in self.extensionContext!.inputItems as! [NSExtensionItem] {
             for provider in item.attachments! {
                 if provider.hasItemConformingToTypeIdentifier(type) {

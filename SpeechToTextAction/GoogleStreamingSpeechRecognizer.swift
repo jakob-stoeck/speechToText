@@ -17,25 +17,41 @@ import Foundation
 import googleapis
 import os.log
 
-let API_KEY = Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as! String
-let HOST = "speech.googleapis.com"
-let SAMPLE_RATE = 16000
-
 typealias SpeechRecognitionCompletionHandler = (StreamingRecognizeResponse?, NSError?) -> (Void)
 
 class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     
-    func supports(url: URL) -> Bool {
-        let supportedFormats = ["opus", "flac", "ogg"]
-        return supportedFormats.contains(url.pathExtension)
-    }
+    static let sharedInstance = GoogleStreamingSpeechRecognizer()
     
-    private var lang : String = "en-US"
-    private var format : String = "en-US"
+    private let API_KEY = Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as! String
+    private let HOST = "speech.googleapis.com"
+    private let SAMPLE_RATE = 16000
+    private var sampleRate: Int = 16000
+    private var streaming = false
+    private var client: Speech!
+    private var writer: GRXBufferedPipe!
+    private var call: GRPCProtoCall!
+    private var lang = "en-US"
+    private var encoding: RecognitionConfig_AudioEncoding!
+    private var transcript: [String] = []
+    private let suffixToEncoding = [
+        "ogg": RecognitionConfig_AudioEncoding.oggOpus,
+        "opus": RecognitionConfig_AudioEncoding.oggOpus,
+        "flac": RecognitionConfig_AudioEncoding.flac,
+    ]
+    
+    func supports(url: URL) -> Bool {
+        return suffixToEncoding.keys.contains(url.pathExtension)
+    }
     
     func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
         
         self.lang = lang
+        self.encoding = suffixToEncoding[url.pathExtension]
+        
+        if self.encoding == nil {
+            return onError(NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+        }
         
         // We recommend sending samples in 100ms chunks
         let chunkSize : Int /* bytes/chunk */ = Int(0.1 /* seconds/chunk */
@@ -47,16 +63,30 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
             return onError(NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
         }
         let chunks = audioData.count/chunkSize + (audioData.count % chunkSize == 0 ? 0 : 1)
+        var baseText = ""
+        
+        weak var timer: Timer?
+        
+        func resetTimer(fun: @escaping () -> Void) {
+            timer?.invalidate()
+            timer = .scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+                os_log("resetting timer", type: .debug)
+                fun()
+            }
+        }
         
         func onAudioChunk(response: StreamingRecognizeResponse?, error: NSError?) {
+            os_log("audio chunk received", type: .debug)
             if let error = error {
+                os_log("error", type: .error)
                 self.stopStreaming()
                 onError(error.localizedDescription)
             } else if let response = response {
-                // while updating, only take the first result, as the others are still likely to change
+//                os_log("onUpdate: \"%@\"", type: .debug, response)
+
                 var text = ""
                 var final = false
-                // on end take the whole result
+
                 for result in response.resultsArray! {
                     guard let result = result as? StreamingRecognitionResult else {
                         return
@@ -68,11 +98,28 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
                     final = result.isFinal || final
                 }
 
-                onUpdate(text)
+                // different results with isFinal: true may arrive multiple times.
+                // the text until a "final" result is purged and the next results
+                // contain only the text from then on forward, so merge them.
+                let separator = baseText != "" ? " " : ""
+                let semifinalText = baseText + separator + text
+                onUpdate(semifinalText)
+                
+                if timer != nil {
+                    resetTimer(fun: { () -> Void in
+                        onEnd(semifinalText)
+                        self.stopStreaming()
+                        os_log("would be onEnd", type: .debug)
+                    })
+                }
 
                 if final {
-                    self.stopStreaming()
-                    onEnd(text)
+                    baseText = semifinalText
+                    resetTimer(fun: { () -> Void in
+                        onEnd(baseText)
+                        self.stopStreaming()
+                        os_log("would be onEnd", type: .debug)
+                    })
                 }
             }
         }
@@ -85,19 +132,14 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
             let chunk = audioData.subdata(in: range)
             self.streamAudioData(chunk)
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            self.stopStreaming() // TODO why can’t we run stop streaming immediately? It should just mark the buffer as finished.
+        }
     }
-    
 
-    var sampleRate: Int = 16000
-    private var streaming = false
-    
-    private var client : Speech!
-    private var writer : GRXBufferedPipe!
-    private var call : GRPCProtoCall!
-    
-    static let sharedInstance = GoogleStreamingSpeechRecognizer()
-    
     func startStreaming(completion: @escaping SpeechRecognitionCompletionHandler) {
+        os_log("starting streaming", type: .debug)
         // set up a gRPC connection
         client = Speech(host:HOST)
         writer = GRXBufferedPipe()
@@ -117,7 +159,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         // send an initial request message to configure the service
         let recognitionConfig = RecognitionConfig()
         // FIXME: language and encoding should be instance variables
-        recognitionConfig.encoding = .oggOpus
+        recognitionConfig.encoding = encoding
         recognitionConfig.sampleRateHertz = Int32(sampleRate)
         recognitionConfig.languageCode = lang
         recognitionConfig.maxAlternatives = 0
@@ -135,6 +177,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     }
     
     func streamAudioData(_ audioData: Data) {
+        os_log("streaming data", type: .debug)
         // send a request message containing the audio data
         let streamingRecognizeRequest = StreamingRecognizeRequest()
         streamingRecognizeRequest.audioContent = audioData as Data
@@ -142,15 +185,12 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     }
     
     func stopStreaming() {
+        os_log("stopping streaming", type: .debug)
         if (!streaming) {
             return
         }
         writer.finishWithError(nil)
         streaming = false
-    }
-    
-    func isStreaming() -> Bool {
-        return streaming
     }
 
 }

@@ -33,10 +33,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H6R-kM-rAU">
                                 <rect key="frame" x="0.0" y="64" width="302" height="447"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Message appears here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-RJ-MO0">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Message appears here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-RJ-MO0">
                                         <rect key="frame" x="0.0" y="0.0" width="302" height="447"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES" calendarEvent="YES"/>
                                     </textView>
@@ -45,15 +45,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="NOA-Dm-cuz" secondAttribute="trailing" id="A05-Pj-hrr"/>
-                            <constraint firstItem="H6R-kM-rAU" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" id="AHn-eC-hFM"/>
-                            <constraint firstItem="H6R-kM-rAU" firstAttribute="leading" secondItem="NOA-Dm-cuz" secondAttribute="leading" id="Ch4-Qf-6e0"/>
-                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" id="HxO-8t-aoh"/>
-                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="H6R-kM-rAU" secondAttribute="trailing" constant="18" id="aGm-Fg-eFZ"/>
-                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="H6R-kM-rAU" secondAttribute="bottom" constant="17" id="rgu-yA-0ou"/>
-                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="top" secondItem="VVe-Uw-JpX" secondAttribute="top" id="we0-1t-bgp"/>
+                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="H6R-kM-rAU" secondAttribute="leading" id="2tb-Ra-tuS"/>
+                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="39V-lI-rMd"/>
+                            <constraint firstItem="6kw-NO-7Wy" firstAttribute="bottom" secondItem="H6R-kM-rAU" secondAttribute="bottom" constant="17" id="47s-Zf-IHm"/>
+                            <constraint firstItem="H6R-kM-rAU" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" id="7U2-XP-cJT"/>
+                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="top" secondItem="6kw-NO-7Wy" secondAttribute="top" id="euQ-JJ-6YT"/>
+                            <constraint firstItem="6kw-NO-7Wy" firstAttribute="trailing" secondItem="H6R-kM-rAU" secondAttribute="trailing" constant="18" id="gw6-9I-7fY"/>
+                            <constraint firstAttribute="trailing" secondItem="NOA-Dm-cuz" secondAttribute="trailing" id="k8X-b9-PAZ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="VVe-Uw-JpX"/>
+                        <viewLayoutGuide key="safeArea" id="6kw-NO-7Wy"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>

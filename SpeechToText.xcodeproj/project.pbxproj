@@ -16,6 +16,7 @@
 		057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546A0292221CFE50099EFFC /* ActionViewController.swift */; };
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
+		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
 		0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */; };
@@ -99,6 +100,7 @@
 		05A1936D2158160500B2199F /* 59secondsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59secondsofsilence.ogg; sourceTree = "<group>"; };
 		05B1293522306D4D000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B1293722306D70000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D70FD7224FF9C3003587C2 /* overoneminute.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = overoneminute.opus; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +216,7 @@
 			children = (
 				05A1936D2158160500B2199F /* 59secondsofsilence.ogg */,
 				05A1936B21580BB900B2199F /* twominsofsilence.ogg */,
+				05D70FD7224FF9C3003587C2 /* overoneminute.opus */,
 				CA20C7B01F7104E2005CAA48 /* test.m4a */,
 				CA20C7B11F7104E2005CAA48 /* test.ogg */,
 				CA20C7B21F7104E2005CAA48 /* test.opus */,
@@ -432,6 +435,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				de,
@@ -467,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */,
 				05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */,
 				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
 				057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */,
