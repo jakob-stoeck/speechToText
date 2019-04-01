@@ -4,7 +4,17 @@ With That’s What She Said you can read the text of any voice message or audio 
 
 [View on App Store](https://itunes.apple.com/us/app/thats-what-she-said/id1239469302?ls=1&mt=8)
 
-## How it works
+## Build and run
+
+Add a `Config.xconfig` file with this content to the project directory:
+
+```
+CLOUD_SPEECH_API_KEY=[your cloud key here]
+```
+
+Then run `./INSTALL-COCOAPODS`
+
+## How it works on the user end
 
 You need to send the voice message you have to an iOS action. Depending on the app this opens behind a button called "Share", "Forward" or "Export". Often it’s also the Apple share symbol.
 

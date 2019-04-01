@@ -17,6 +17,9 @@
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
 		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
+		05D70FDA22516530003587C2 /* Config.xconfig in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD922516530003587C2 /* Config.xconfig */; };
+		05D70FDB22516530003587C2 /* Config.xconfig in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD922516530003587C2 /* Config.xconfig */; };
+		05D70FDC22516530003587C2 /* Config.xconfig in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD922516530003587C2 /* Config.xconfig */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
 		0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */; };
@@ -101,6 +104,7 @@
 		05B1293522306D4D000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B1293722306D70000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D70FD7224FF9C3003587C2 /* overoneminute.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = overoneminute.opus; sourceTree = "<group>"; };
+		05D70FD922516530003587C2 /* Config.xconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.xconfig; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +125,6 @@
 		CA35C9541F5EF9CF004B5A32 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CA52DEC61F0B766000D96FEC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CA6C1ACC1F5EEE1C003A97FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		CAA706662157F4D500E08CEA /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
 		CAA9CE451F5FF84A0044AF54 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CAAEE4151EC1CDEF00292860 /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAEE4181EC1CDEF00292860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -227,7 +230,7 @@
 		CAAEE40C1EC1CDEE00292860 = {
 			isa = PBXGroup;
 			children = (
-				CAA706662157F4D500E08CEA /* Config.xcconfig */,
+				05D70FD922516530003587C2 /* Config.xconfig */,
 				CAAEE4171EC1CDEF00292860 /* SpeechToText */,
 				CAAEE42C1EC1CDEF00292860 /* SpeechToTextTests */,
 				CAAEE4371EC1CDEF00292860 /* SpeechToTextUITests */,
@@ -397,7 +400,7 @@
 					CAAEE4141EC1CDEE00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 5SCE44WH8R;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -407,20 +410,20 @@
 					};
 					CAAEE4281EC1CDEF00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CAAEE4141EC1CDEE00292860;
 					};
 					CAAEE4331EC1CDEF00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CAAEE4141EC1CDEE00292860;
 					};
 					CAAEE46E1EC22F7A00292860 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 5SCE44WH8R;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -432,10 +435,9 @@
 			};
 			buildConfigurationList = CAAEE4101EC1CDEE00292860 /* Build configuration list for PBXProject "SpeechToText" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				de,
@@ -461,6 +463,7 @@
 				CA35C93E1F5EF551004B5A32 /* Localizable.strings in Resources */,
 				CA35C9491F5EF552004B5A32 /* InfoPlist.strings in Resources */,
 				CA52DEC71F0B766000D96FEC /* Settings.bundle in Resources */,
+				05D70FDA22516530003587C2 /* Config.xconfig in Resources */,
 				CAAEE4231EC1CDEF00292860 /* LaunchScreen.storyboard in Resources */,
 				CAAEE4201EC1CDEF00292860 /* Assets.xcassets in Resources */,
 				CAAEE41E1EC1CDEF00292860 /* Main.storyboard in Resources */,
@@ -471,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D70FDC22516530003587C2 /* Config.xconfig in Resources */,
 				05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */,
 				05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */,
 				CA20C7B31F7104E2005CAA48 /* test.m4a in Resources */,
@@ -492,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D70FDB22516530003587C2 /* Config.xconfig in Resources */,
 				CA52DEC81F0B766000D96FEC /* Settings.bundle in Resources */,
 				056622ED222200F800D566DE /* MainInterface.storyboard in Resources */,
 				CA35C9531F5EF9CF004B5A32 /* Localizable.strings in Resources */,
@@ -755,7 +760,6 @@
 /* Begin XCBuildConfiguration section */
 		CAAEE43B1EC1CDEF00292860 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAA706662157F4D500E08CEA /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -820,7 +824,6 @@
 		};
 		CAAEE43C1EC1CDEF00292860 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAA706662157F4D500E08CEA /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -889,8 +892,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -908,8 +910,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -924,8 +925,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Debug;
@@ -940,8 +940,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechToText.app/SpeechToText";
 			};
 			name = Release;
@@ -955,8 +954,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Debug;
@@ -970,8 +968,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = js.SpeechToTextUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = SpeechToText;
 			};
 			name = Release;
@@ -988,8 +985,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1006,8 +1002,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
