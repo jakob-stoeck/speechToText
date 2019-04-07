@@ -23,7 +23,7 @@ class SpeechToTextTests: XCTestCase {
     
     func testGoogleResponseWithDifferentConfidences() {
         let rawJson = "{\"results\": [{\"alternatives\": [{\"transcript\": \"abc\", \"confidence\": 0.99}]}, {\"alternatives\": [{\"transcript\": \"def\", \"confidence\": 0.6}]}]}"
-        let transcribed = "abcdef"
+        let transcribed = "abc def"
         assertGoogleResponseInitEquals(rawJson: rawJson, transcribed: transcribed)
     }
     
@@ -99,20 +99,20 @@ class SpeechToTextTests: XCTestCase {
     func testRecognitionOggStreaming() {
         let bundle = Bundle(for: type(of: self))
         let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE", recognizer: recognizer)
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "Hallo, das ist ein Test.", language: "de-DE", recognizer: recognizer)
     }
     
     func testRecognitionOggSynchronous() {
         let bundle = Bundle(for: type(of: self))
         let recognizer = GoogleJsonSpeechRecognizer.sharedInstance
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "hallo das ist ein Test", language: "de-DE", recognizer: recognizer)
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "Hallo, das ist ein Test.", language: "de-DE", recognizer: recognizer)
     }
 
     
     func testRecognitionOpus() {
         let bundle = Bundle(for: type(of: self))
         let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
-        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "oh wie schön Paris", language: "de-DE", recognizer: recognizer)
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "opus")!, text: "Oh, wie schön Paris.", language: "de-DE", recognizer: recognizer)
     }
     
     // FIXME: Test fails with recent ios. I think right now, Apple Speech Recognizer are only testable on a real device.
@@ -122,7 +122,7 @@ class SpeechToTextTests: XCTestCase {
         assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "m4a")!, text: "Das funktioniert ja ganz gut eigentlich was kann ich denn dazu sagen Lalalalalala", language: "de-DE", recognizer: recognizer)
     }
 
-    let overOneMinuteText = "hallo guten Morgen Gitti Oma ich habe den Elias auf dem Video gesehen das ist ja unglaublich ich könnte mich so erinnern dass ihr mit 34 Monaten 3 4 Monaten der Kopf hochgehoben habt weiß nicht ob ich das noch richtig in Erinnerung habe aber irgendwas nicht mit einem Ort anderthalb sehr lustig ja ich glaube der muss ja bald aus dem Körbchen raus weil sonst gibt dann vielleicht zu hoch damit der was sieht ne wann sind und schön festhalten auf dem Wickeltisch ich glaube er robbt bald los ist ja der Wahnsinn sehr sportlich sehr beweglich lustig also bis bald achso übrigens die ist aber am Wochenende hier das war auch sehr schön das erste Mal dass mir meine Schwester oder überhaupt eine Schwester ein Brot geschmiert und da musste ich erst 57 werden bis bald ciao"
+    let overOneMinuteText = "Hallo, guten Morgen Gitti Oma, ich habe den Elias auf dem Video gesehen, das ist ja unglaublich, ich könnte mich so erinnern, dass ihr mit 34 Monaten 3 4 Monaten der Kopf hochgehoben habt. Weiß nicht, ob ich das noch richtig in Erinnerung habe, aber irgendwas nicht mit einem Ort anderthalb sehr lustig. Ja, ich glaube, der muss ja bald aus dem Körbchen raus, weil sonst gibt dann vielleicht zu hoch, damit der was sieht, ne? Wann sind und schön festhalten auf dem Wickeltisch. Ich glaube, er robbt bald los ist ja der Wahnsinn. Sehr sportlich, sehr beweglich lustig, also bis bald. Achso übrigens, die ist aber am Wochenende hier, das war auch sehr schön das erste Mal, dass mir meine Schwester oder überhaupt eine Schwester ein Brot geschmiert und da musste ich erst 57 werden. Bis bald. Ciao."
     
     func testRecognitionOpusStreamingOverOneMinute() {
         let bundle = Bundle(for: type(of: self))

@@ -48,7 +48,8 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
                 "languageCode": lang,
                 "encoding": audioCode,
                 "sampleRateHertz": 16000,
-                "enableWordTimeOffsets": false
+                "enableWordTimeOffsets": false,
+                "enableAutomaticPunctuation": true
             ]
         ]
         

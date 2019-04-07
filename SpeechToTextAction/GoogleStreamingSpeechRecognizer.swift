@@ -164,6 +164,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         recognitionConfig.languageCode = lang
         recognitionConfig.maxAlternatives = 0
         recognitionConfig.enableWordTimeOffsets = false
+        recognitionConfig.enableAutomaticPunctuation = true
         
         let streamingRecognitionConfig = StreamingRecognitionConfig()
         streamingRecognitionConfig.config = recognitionConfig
