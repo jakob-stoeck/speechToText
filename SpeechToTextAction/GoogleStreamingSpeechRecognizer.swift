@@ -163,7 +163,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         recognitionConfig.sampleRateHertz = Int32(sampleRate)
         recognitionConfig.languageCode = lang
         recognitionConfig.maxAlternatives = 0
-        recognitionConfig.enableWordTimeOffsets = true
+        recognitionConfig.enableWordTimeOffsets = false
         
         let streamingRecognitionConfig = StreamingRecognitionConfig()
         streamingRecognitionConfig.config = recognitionConfig
