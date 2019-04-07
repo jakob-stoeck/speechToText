@@ -18,6 +18,8 @@ build/
 *.hmap
 *.pbobjc.h
 *.pbobjc.m
+*.pbrpc.h
+*.pbrpc.m
 
 # Automatic backup files
 *~.nib/
@@ -25,3 +27,6 @@ build/
 *~
 *.dat
 *.dep
+
+# Cocoapods
+Pods
