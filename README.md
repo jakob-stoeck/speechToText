@@ -6,13 +6,7 @@ With That’s What She Said you can read the text of any voice message or audio 
 
 ## Build and run
 
-Add a `Config.xconfig` file with this content to the project directory:
-
-```
-CLOUD_SPEECH_API_KEY=[your cloud key here]
-```
-
-Then run `./INSTALL-COCOAPODS`
+Run `./INSTALL-COCOAPODS`. You will be asked for a Google Cloud Speech API Key.
 
 ## How it works on the user end
 

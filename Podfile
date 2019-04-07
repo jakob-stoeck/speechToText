@@ -1,6 +1,12 @@
 # platform :ios, '9.0'
 use_frameworks!
 
+plugin 'cocoapods-keys',
+  project: 'SpeechToText',
+  keys: [
+    'GoogleCloudSpeechApiKey',
+  ]
+
 target 'SpeechToText' do
 
   # Pods for SpeechToText

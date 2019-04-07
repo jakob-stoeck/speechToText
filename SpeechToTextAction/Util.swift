@@ -11,6 +11,7 @@ import MobileCoreServices
 import Speech
 import UserNotifications
 import os.log
+import Keys
 
 class Util {
     class func post(url: URL, data: Data, completionHandler: @escaping (Data) -> ()) {
@@ -65,4 +66,8 @@ class Util {
 //        notify(title: title, body: text)
     }
 
+    class func getCloudSpeechApiKey() -> String? {
+        let keys = SpeechToTextKeys()
+        return keys.googleCloudSpeechApiKey;
+    }
 }

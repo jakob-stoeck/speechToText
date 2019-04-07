@@ -72,6 +72,11 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertEqual(formerLanguage, Settings.getLanguage())
     }
     
+    func testGetGoogleApiKeyWorks() {
+        let key = Util.getCloudSpeechApiKey()!
+        XCTAssertTrue(key.lengthOfBytes(using: .utf8) >= 40)
+    }
+
     func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer) {
         let expectation = self.expectation(description: url.absoluteString)
         recognizer.recognize(

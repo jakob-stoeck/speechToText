@@ -60,7 +60,7 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
         }
         os_log("asking google", log: OSLog.default, type: .debug)
         // there is a streaming API which might be faster than waiting to upload everything
-        guard let key = getCloudSpeechApiKey() else {
+        guard let key = Util.getCloudSpeechApiKey() else {
             return onError(NSLocalizedString("speech.google.cloudkey", value: "Cloud key not found", comment: "Google Cloud Key was not configured in the app"))
         }
         Util.post(url: URL(string: "https://speech.googleapis.com/v1/speech:recognize?key=\(key)")!, data: json) {
@@ -95,9 +95,4 @@ class GoogleJsonSpeechRecognizer: SpeechRecognizer {
             }.joined(separator: " ")
         return text
     }
-
-    func getCloudSpeechApiKey() -> String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as? String
-    }
-
 }

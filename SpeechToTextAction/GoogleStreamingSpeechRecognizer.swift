@@ -23,7 +23,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     
     static let sharedInstance = GoogleStreamingSpeechRecognizer()
     
-    private let API_KEY = Bundle.main.object(forInfoDictionaryKey: "CloudSpeechApiKey") as! String
+    private let API_KEY = Util.getCloudSpeechApiKey()!
     private let HOST = "speech.googleapis.com"
     private let SAMPLE_RATE = 16000
     private var sampleRate: Int = 16000
