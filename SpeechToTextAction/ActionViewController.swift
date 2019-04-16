@@ -13,6 +13,7 @@ import os.log
 class ActionViewController: UIViewController {
     
     @IBOutlet weak var message: UITextView!
+    @IBOutlet weak var openSettingsButton: UIButton!
     
     func receivedUrl(url: URL) {
         onTranscription(text: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"))
@@ -27,8 +28,20 @@ class ActionViewController: UIViewController {
             lang: Settings.getLanguage(),
             onUpdate: self.onTranscription,
             onEnd: self.onTranscription,
-            onError: { error in Util.errorHandler(error) }
+            onError: self.onError
         )
+    }
+    
+    func onError(_ text: String) {
+        let alert = UIAlertController(title: "Error",
+                                      message: text,
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func onTranscription(text: String) {
@@ -43,6 +56,10 @@ class ActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        let lang = Settings.getLanguage()
+        let format = NSLocalizedString("main.change_language", value: "Voice language: %@. Tap to change.", comment: "Button title to change language")
+        self.openSettingsButton.setTitle(String.localizedStringWithFormat(format, lang), for: UIControl.State.normal)
+        
         // Get the item[s] we're handling from the extension context.
         // Replace this with something appropriate for the type[s] your extension supports.
         var found = false
@@ -70,6 +87,24 @@ class ActionViewController: UIViewController {
             }
         }
         Util.errorHandler(NSLocalizedString("action.error", value: "No attachment found", comment: "There was no attachment which could have been used"))
+    }
+
+    //MARK: Actions
+    @IBAction func openSettings(_ sender: UIButton) {
+        // https://stackoverflow.com/questions/48381778/open-settings-app-from-today-extension-widget
+        let url = URL(string:"whatshesaid://settings")!
+        extensionContext?.open(url, completionHandler: { (success) in
+            if !success {
+                var responder = self as UIResponder?
+                while (responder != nil){
+                    let selectorOpenURL = NSSelectorFromString("openURL:")
+                    if responder?.responds(to: selectorOpenURL) == true {
+                        _ = responder?.perform(selectorOpenURL, with: url)
+                    }
+                    responder = responder?.next
+                }
+            }
+        })
     }
 
     @IBAction func done() {

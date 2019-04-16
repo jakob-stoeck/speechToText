@@ -51,6 +51,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         os_log("upload finished", log: OSLog.default, type: .debug)
     }
 
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool {
+        
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let host = components.host else {
+                print("Invaid component")
+                return false
+        }
+        if host == "settings" {
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        }
+        return true
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(UNNotificationPresentationOptions.alert)
     }

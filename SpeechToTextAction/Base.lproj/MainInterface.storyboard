@@ -34,12 +34,26 @@
                                 <rect key="frame" x="0.0" y="64" width="302" height="447"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Message appears here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-RJ-MO0">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="447"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="302" height="411"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES" calendarEvent="YES"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcf-GG-PdV">
+                                        <rect key="frame" x="0.0" y="411" width="302" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="eqk-P2-bCh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                        <state key="normal" title="Change Language"/>
+                                        <connections>
+                                            <action selector="openSettings:" destination="ObA-dk-sSI" eventType="touchUpInside" id="BNZ-od-q5f"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pA4-TE-JZh">
+                                        <rect key="frame" x="0.0" y="447" width="302" height="0.0"/>
+                                    </pickerView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -59,6 +73,7 @@
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
                         <outlet property="message" destination="ytg-RJ-MO0" id="gRl-Df-utN"/>
+                        <outlet property="openSettingsButton" destination="kcf-GG-PdV" id="Bzx-lK-qXm"/>
                         <outlet property="view" destination="zMn-AG-sqS" id="Qma-de-2ek"/>
                     </connections>
                 </viewController>

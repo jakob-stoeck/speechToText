@@ -34,10 +34,10 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     private var lang = "en-US"
     private var encoding: RecognitionConfig_AudioEncoding!
     private var transcript: [String] = []
-    private let suffixToEncoding = [
-        "ogg": RecognitionConfig_AudioEncoding.oggOpus,
-        "opus": RecognitionConfig_AudioEncoding.oggOpus,
-        "flac": RecognitionConfig_AudioEncoding.flac,
+    private let suffixToEncoding: [String: RecognitionConfig_AudioEncoding] = [
+        "ogg": .oggOpus,
+        "opus": .oggOpus,
+        "flac": .flac,
     ]
     
     func supports(url: URL) -> Bool {
@@ -82,8 +82,6 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
                 self.stopStreaming()
                 onError(error.localizedDescription)
             } else if let response = response {
-//                os_log("onUpdate: \"%@\"", type: .debug, response)
-
                 var text = ""
                 var final = false
 
