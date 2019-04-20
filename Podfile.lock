@@ -4,6 +4,7 @@ PODS:
   - "!ProtoCompiler-gRPCPlugin (1.19.0)":
     - "!ProtoCompiler (= 3.6.1)"
     - gRPC-ProtoRPC (= 1.19.0)
+  - APAudioPlayer (0.0.4)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -51,6 +52,7 @@ PODS:
   - Protobuf (3.6.1)
 
 DEPENDENCIES:
+  - APAudioPlayer (~> 0.0)
   - googleapis (from `.`)
   - Keys (from `Pods/CocoaPodsKeys`)
 
@@ -58,6 +60,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - "!ProtoCompiler"
     - "!ProtoCompiler-gRPCPlugin"
+    - APAudioPlayer
     - BoringSSL-GRPC
     - gRPC
     - gRPC-Core
@@ -75,6 +78,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   "!ProtoCompiler": 5d6b6dcd2d0940aed49642c9af962bff532da096
   "!ProtoCompiler-gRPCPlugin": 433d3331aebb1a4756b8fef6d78655cb3e4ea91c
+  APAudioPlayer: 4b795d771a2fb901869d39e43f6e516c48a0a2f0
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   googleapis: aca6318130c96d3f627ec57af5eb3c9f1dbcf963
   gRPC: 77d2866b3ce1e187b2239d8adba48b98d9524c15
@@ -85,6 +89,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 2f037e2a3fc948310a53a3a9ed25b2b346c12f4a
+PODFILE CHECKSUM: bd22e29de295e0e857391374730e84831b4a104b
 
 COCOAPODS: 1.6.1

@@ -16,6 +16,7 @@
 import Foundation
 import googleapis
 import os.log
+import APAudioPlayer
 
 typealias SpeechRecognitionCompletionHandler = (StreamingRecognizeResponse?, NSError?) -> (Void)
 
@@ -41,7 +42,12 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     ]
     
     func supports(url: URL) -> Bool {
-        return suffixToEncoding.keys.contains(url.pathExtension)
+        if (suffixToEncoding.keys.contains(url.pathExtension)) {
+            let player = APAudioPlayer()
+            player.loadItem(with: url, autoPlay: false)
+            return player.duration() <= 60
+        }
+        return false
     }
     
     func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {

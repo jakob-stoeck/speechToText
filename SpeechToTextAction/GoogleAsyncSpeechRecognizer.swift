@@ -61,6 +61,8 @@ class GoogleAsyncSpeechRecognizer: SpeechRecognizer {
         req.config = config
         req.audio.content = audioData
         
+        onUpdate(NSLocalizedString("action.loading_title", value: "Transcribing ... This is a longer message. It takes around 30 seconds to transcribe. Please wait.", comment: "Notification that transcription will take a bit"))
+        
         let call = client.rpcToLongRunningRecognize(with: req) { op, err in
             if err != nil {
                 return onError(err!.localizedDescription)
@@ -83,7 +85,11 @@ class GoogleAsyncSpeechRecognizer: SpeechRecognizer {
                         guard let alternative = speechRecognitionResult.alternativesArray[0] as? SpeechRecognitionAlternative else {
                             return onError("Parsing failed")
                         }
-                        text += alternative.transcript
+                        if text == "" {
+                            text = alternative.transcript
+                        } else {
+                            text += " " + alternative.transcript
+                        }
                     }
                     return onEnd(text)
                 } catch {

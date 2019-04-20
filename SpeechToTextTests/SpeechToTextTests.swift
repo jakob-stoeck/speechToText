@@ -8,7 +8,8 @@
 
 import XCTest
 import googleapis
-@testable import SpeechToText
+import APAudioPlayer
+//@testable import SpeechToText
 
 class SpeechToTextTests: XCTestCase {
     
@@ -94,6 +95,42 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertTrue(key.lengthOfBytes(using: .utf8) == 39)
     }
 
+    func testAudioMetadata() {
+        // AVAsset does not support ogg and flac
+        let bundle = Bundle(for: type(of: self))
+        let urls: [URL: TimeInterval] = [
+            bundle.url(forResource: "test", withExtension: "opus")!: 2,
+            bundle.url(forResource: "test", withExtension: "ogg")!: 4,
+            bundle.url(forResource: "test", withExtension: "m4a")!: 7,
+            bundle.url(forResource: "overoneminute", withExtension: "opus")!: 63,
+            bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!: 120,
+        ]
+        let player = APAudioPlayer()
+        for (url, duration) in urls {
+            player.loadItem(with: url, autoPlay: false)
+            XCTAssertEqual(player.duration().rounded(), duration)
+        }
+    }
+    
+    func testBestRecognizer() {
+        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleAsyncSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
+        let bundle = Bundle(for: type(of: self))
+        let urls: [URL: SpeechRecognizer] = [
+            bundle.url(forResource: "test", withExtension: "opus")!: GoogleStreamingSpeechRecognizer.sharedInstance,
+            bundle.url(forResource: "test", withExtension: "ogg")!: GoogleStreamingSpeechRecognizer.sharedInstance,
+            bundle.url(forResource: "test", withExtension: "m4a")!: AppleSpeechRecognizer.sharedInstance,
+            bundle.url(forResource: "overoneminute", withExtension: "opus")!: GoogleAsyncSpeechRecognizer.sharedInstance,
+            bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!: GoogleAsyncSpeechRecognizer.sharedInstance,
+        ]
+
+        for (url, recognizer) in urls {
+            let best = candidates.first(where: { $0.supports(url: url) })!
+            let bestType = String(describing: type(of: best))
+            let recognizerType = String(describing: type(of: recognizer))
+            XCTAssertEqual(bestType, recognizerType, "Incorrect recognizer for \(url)")
+        }
+    }
+    
     func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer, timeout: TimeInterval = 30) {
         let expectation = self.expectation(description: url.absoluteString)
         recognizer.recognize(
@@ -149,7 +186,7 @@ class SpeechToTextTests: XCTestCase {
     
     func testRecognitionOpusStreamingOverOneMinute() {
         let bundle = Bundle(for: type(of: self))
-        let recognizer = GoogleStreamingSpeechRecognizer.sharedInstance
+        let recognizer = GoogleAsyncSpeechRecognizer.sharedInstance
         assertTranscriptEquals(url: bundle.url(forResource: "overoneminute", withExtension: "opus")!, text: overOneMinuteText, language: "de-DE", recognizer: recognizer)
     }
 
