@@ -11,11 +11,15 @@
 		050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
 		05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
+		0518D5ED2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
+		0518D5EE2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
 		056622ED222200F800D566DE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0546A02B2221CFE50099EFFC /* MainInterface.storyboard */; };
 		057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9551F5EF9CF004B5A32 /* Localizable.strings */; };
 		057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546A0292221CFE50099EFFC /* ActionViewController.swift */; };
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
+		05C229892266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
+		05C2298A226786930052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
 		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
@@ -92,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleStreamingSpeechRecognizer.swift; sourceTree = "<group>"; };
+		0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLongrunningOperations.swift; sourceTree = "<group>"; };
 		0546A0292221CFE50099EFFC /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		0546A02C2221CFE50099EFFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		056622EC2221FEA100D566DE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 		05A1936D2158160500B2199F /* 59secondsofsilence.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59secondsofsilence.ogg; sourceTree = "<group>"; };
 		05B1293522306D4D000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B1293722306D70000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAsyncSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05D70FD7224FF9C3003587C2 /* overoneminute.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = overoneminute.opus; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
@@ -296,8 +302,10 @@
 				CAC259491F69C89B007C4BB3 /* SpeechRecognizer.swift */,
 				05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */,
 				0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */,
+				05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */,
 				CAC2594B1F69C954007C4BB3 /* Util.swift */,
 				05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */,
+				0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */,
 			);
 			path = SpeechToTextAction;
 			sourceTree = "<group>";
@@ -645,11 +653,13 @@
 			files = (
 				CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */,
 				05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
+				0518D5EE2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
 				CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				CAC259511F69D836007C4BB3 /* Util.swift in Sources */,
 				050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */,
 				CAC2594F1F69D829007C4BB3 /* Settings.swift in Sources */,
 				050E0C40224A73D2006CF681 /* AppleSpeechRecognizer.swift in Sources */,
+				05C2298A226786930052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */,
 				CAC2594E1F69D825007C4BB3 /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,11 +678,13 @@
 			files = (
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
 				057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */,
+				0518D5ED2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
 				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
 				05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */,
 				05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */,
+				05C229892266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */,
 				CAE1499F1ECDB5A600162D3E /* Transcript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

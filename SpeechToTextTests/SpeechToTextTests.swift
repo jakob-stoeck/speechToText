@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import googleapis
 @testable import SpeechToText
 
 class SpeechToTextTests: XCTestCase {
@@ -53,6 +54,22 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertEqual(shouldBeTranscribed, googleTranscript!)
     }
 
+    func testGoogleLongRunningOperationResponse() {
+        let operationSerialized = "ChM4NzMzMjE0NTI5OTY4OTQ1ODI1EmgKR3R5cGUuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmNsb3VkLnNwZWVjaC52MS5Mb25nUnVubmluZ1JlY29nbml6ZU1ldGFkYXRhEh0IZBILCJWX7OUFEIDMmDUaDAiYl+zlBRDQk83PAhgBKm4KR3R5cGUuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmNsb3VkLnNwZWVjaC52MS5Mb25nUnVubmluZ1JlY29nbml6ZVJlc3BvbnNlEiMSIQofChhIYWxsbywgZGFzIGlzdCBlaW4gVGVzdC4VyUdrPw=="
+        let op = try! Operation.init(data: Data.init(base64Encoded: operationSerialized)!)
+        XCTAssertEqual(op.name, "8733214529968945825")
+        
+        let metadataValue = op.metadata.value
+        let longRunningRecognizeMetadata = try! LongRunningRecognizeMetadata.init(data: metadataValue!)
+        XCTAssertEqual(longRunningRecognizeMetadata.progressPercent, 100)
+
+        let responseValue = op.response.value
+        let longRunningRecognizeResponse = try! LongRunningRecognizeResponse.init(data: responseValue!)
+        let result = longRunningRecognizeResponse.resultsArray[0] as! SpeechRecognitionResult
+        let alternative = result.alternativesArray[0] as? SpeechRecognitionAlternative
+        XCTAssertEqual(alternative?.transcript, "Hallo, das ist ein Test.")
+    }
+    
     func testLanguage() {
         XCTAssertEqual("en", Settings.getLanguagePart("en-US"))
         XCTAssertEqual("en", Settings.getLanguagePart("en"))
@@ -77,7 +94,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertTrue(key.lengthOfBytes(using: .utf8) == 39)
     }
 
-    func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer) {
+    func assertTranscriptEquals(url: URL, text: String, language: String, recognizer: SpeechRecognizer, timeout: TimeInterval = 30) {
         let expectation = self.expectation(description: url.absoluteString)
         recognizer.recognize(
             url: url,
@@ -93,7 +110,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTFail(errorText)
             }
         )
-        waitForExpectations(timeout: 30)
+        waitForExpectations(timeout: timeout)
     }
     
     func testRecognitionOggStreaming() {
@@ -105,6 +122,12 @@ class SpeechToTextTests: XCTestCase {
     func testRecognitionOggSynchronous() {
         let bundle = Bundle(for: type(of: self))
         let recognizer = GoogleJsonSpeechRecognizer.sharedInstance
+        assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "Hallo, das ist ein Test.", language: "de-DE", recognizer: recognizer)
+    }
+
+    func testRecognitionOggAynchronous() {
+        let bundle = Bundle(for: type(of: self))
+        let recognizer = GoogleAsyncSpeechRecognizer.sharedInstance
         assertTranscriptEquals(url: bundle.url(forResource: "test", withExtension: "ogg")!, text: "Hallo, das ist ein Test.", language: "de-DE", recognizer: recognizer)
     }
 
