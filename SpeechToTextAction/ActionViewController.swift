@@ -18,7 +18,7 @@ class ActionViewController: UIViewController {
     func receivedUrl(url: URL) {
         onTranscription(text: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"))
         
-        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleJsonSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
+        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleAsyncSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
         guard let best = candidates.first(where: { $0.supports(url: url) }) else {
             return Util.errorHandler("No suitable speech recognizer found")
         }
@@ -49,7 +49,9 @@ class ActionViewController: UIViewController {
         guard let strongMessage = self.message else {
             return
         }
-        strongMessage.text = text
+        DispatchQueue.main.async {
+            strongMessage.text = text
+        }
         Transcript(text)?.save()
     }
     

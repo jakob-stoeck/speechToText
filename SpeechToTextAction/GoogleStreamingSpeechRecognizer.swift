@@ -16,7 +16,6 @@
 import Foundation
 import googleapis
 import os.log
-import APAudioPlayer
 
 typealias SpeechRecognitionCompletionHandler = (StreamingRecognizeResponse?, NSError?) -> (Void)
 
@@ -42,12 +41,10 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
     ]
     
     func supports(url: URL) -> Bool {
-        if (suffixToEncoding.keys.contains(url.pathExtension)) {
-            let player = APAudioPlayer()
-            player.loadItem(with: url, autoPlay: false)
-            return player.duration() <= 60
-        }
-        return false
+        let formatOk = suffixToEncoding.keys.contains(url.pathExtension)
+        // cannot read all audio format metadata, yet. So use magic file size number :/
+        let fileSizeOk = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize! < 148000) ?? false
+        return formatOk && fileSizeOk
     }
     
     func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {

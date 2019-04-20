@@ -97,6 +97,10 @@
 /* Begin PBXFileReference section */
 		0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleStreamingSpeechRecognizer.swift; sourceTree = "<group>"; };
 		0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLongrunningOperations.swift; sourceTree = "<group>"; };
+		0518D5EF226B8ABE009B5A6F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0518D5F1226B8B7F009B5A6F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		0518D5F3226B8B92009B5A6F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0518D5F5226B8B9C009B5A6F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0546A0292221CFE50099EFFC /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		0546A02C2221CFE50099EFFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		056622EC2221FEA100D566DE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -191,6 +195,10 @@
 		3300623805E133B39DB3AF81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0518D5F5226B8B9C009B5A6F /* CFNetwork.framework */,
+				0518D5F3226B8B92009B5A6F /* SystemConfiguration.framework */,
+				0518D5F1226B8B7F009B5A6F /* Accelerate.framework */,
+				0518D5EF226B8ABE009B5A6F /* AudioToolbox.framework */,
 				05B1293722306D70000D2C96 /* googleapis.framework */,
 				05B1293522306D4D000D2C96 /* googleapis.framework */,
 				AC372E5180A19E87F864EBD7 /* Pods_SpeechToText.framework */,
@@ -799,6 +807,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -863,6 +872,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -988,6 +998,10 @@
 				DEVELOPMENT_TEAM = 5SCE44WH8R;
 				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpeechToTextAction",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1005,6 +1019,10 @@
 				DEVELOPMENT_TEAM = 5SCE44WH8R;
 				INFOPLIST_FILE = SpeechToTextAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpeechToTextAction",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.jakobstoeck.VoiceToText.VoiceToTextAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

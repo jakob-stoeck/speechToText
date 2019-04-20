@@ -8,7 +8,6 @@
 
 import XCTest
 import googleapis
-import APAudioPlayer
 //@testable import SpeechToText
 
 class SpeechToTextTests: XCTestCase {
@@ -95,22 +94,23 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertTrue(key.lengthOfBytes(using: .utf8) == 39)
     }
 
-    func testAudioMetadata() {
-        // AVAsset does not support ogg and flac
-        let bundle = Bundle(for: type(of: self))
-        let urls: [URL: TimeInterval] = [
-            bundle.url(forResource: "test", withExtension: "opus")!: 2,
-            bundle.url(forResource: "test", withExtension: "ogg")!: 4,
-            bundle.url(forResource: "test", withExtension: "m4a")!: 7,
-            bundle.url(forResource: "overoneminute", withExtension: "opus")!: 63,
-            bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!: 120,
-        ]
-        let player = APAudioPlayer()
-        for (url, duration) in urls {
-            player.loadItem(with: url, autoPlay: false)
-            XCTAssertEqual(player.duration().rounded(), duration)
-        }
-    }
+//    // FIXME APAudioPlayer does not work on all iPhones, cannot use it, yet.
+//    func testAudioMetadata() {
+//        // AVAsset does not support ogg and flac
+//        let bundle = Bundle(for: type(of: self))
+//        let urls: [URL: TimeInterval] = [
+//            bundle.url(forResource: "test", withExtension: "opus")!: 2,
+//            bundle.url(forResource: "test", withExtension: "ogg")!: 4,
+//            bundle.url(forResource: "test", withExtension: "m4a")!: 7,
+//            bundle.url(forResource: "overoneminute", withExtension: "opus")!: 63,
+//            bundle.url(forResource: "twominsofsilence", withExtension: "ogg")!: 120,
+//        ]
+//        let player = APAudioPlayer()
+//        for (url, duration) in urls {
+//            player.loadItem(with: url, autoPlay: false)
+//            XCTAssertEqual(player.duration().rounded(), duration)
+//        }
+//    }
     
     func testBestRecognizer() {
         let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleAsyncSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
