@@ -9,15 +9,15 @@
 import UIKit
 
 protocol SpeechRecognizer {
-
-    func supports(url: URL) -> Bool
-    
-    func recognize(
-        url: URL,
-        lang: String,
-        onUpdate: @escaping (String) -> (),
-        onEnd: @escaping (String) -> (),
-        onError: @escaping (String) -> ()
-    )
-
+    var url: URL { get }
+    var delegate: SpeechRecognizerDelegate? { get set }
+    init?(url: URL, lang: String, delegate: SpeechRecognizerDelegate?)
+    func recognize()
 }
+
+protocol SpeechRecognizerDelegate: AnyObject {
+    func onUpdate(_ sr: SpeechRecognizer, text: String)
+    func onEnd(_ sr: SpeechRecognizer, text: String)
+    func onError(_ sr: SpeechRecognizer, text: String)
+}
+

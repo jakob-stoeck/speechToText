@@ -13,47 +13,49 @@ import UserNotifications
 import os.log
 
 class AppleSpeechRecognizer: SpeechRecognizer {
-    
-    static let sharedInstance = AppleSpeechRecognizer()
-    
-    func supports(url: URL) -> Bool {
-        let supportedFormats = ["aac", "adts", "ac3", "aif", "aiff", "aifc", "caf", "mp3", "mp4", "m4a", "snd", "au", "sd2", "wav"]
-        return supportedFormats.contains(url.pathExtension)
+    let url: URL
+    let lang: String
+    let supportedFormats = ["aac", "adts", "ac3", "aif", "aiff", "aifc", "caf", "mp3", "mp4", "m4a", "snd", "au", "sd2", "wav"]
+    weak var delegate: SpeechRecognizerDelegate?
+
+    required init?(url: URL, lang: String, delegate: SpeechRecognizerDelegate?) {
+        self.url = url
+        self.lang = lang.replacingOccurrences(of: "-", with: "_")
+        self.delegate = delegate
+        if !supportedFormats.contains(url.pathExtension) {
+            return nil
+        }
     }
     
-    func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
-        askPermission()
-        let localeID = lang.replacingOccurrences(of: "-", with: "_")
-        guard let recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: localeID)) else {
-            Util.errorHandler(NSLocalizedString("speech.apple.locale", value: "Locale not supported", comment: "Apple SR does not support the current locale"))
+    func recognize() {
+        SFSpeechRecognizer.requestAuthorization(authComplete)
+    }
+    
+    func authComplete(authStatus: SFSpeechRecognizerAuthorizationStatus) {
+        if authStatus != .authorized {
+            return Util.errorHandler(NSLocalizedString("speech.apple.unauthorized", value: "Speech recognition was not authorized", comment: "Apple SR was unauthorized"))
+        }
+        guard let recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: lang)) else {
+            delegate?.onError(self, text: NSLocalizedString("speech.apple.locale", value: "Locale not supported", comment: "Apple SR does not support the current locale"))
             return
         }
         if !recognizer.isAvailable {
-            Util.errorHandler(NSLocalizedString("speech.apple.availability", value: "not available, e.g. no internet", comment: "Apple SR is not available"))
+            delegate?.onError(self, text: NSLocalizedString("speech.apple.availability", value: "not available, e.g. no internet", comment: "Apple SR is not available"))
             return
         }
         let request = SFSpeechURLRecognitionRequest(url: url)
         os_log("asking apple", log: OSLog.default, type: .debug)
-        recognizer.recognitionTask(with: request) { (result, error) in
-            guard let result = result else {
-                Util.errorHandler(error!.localizedDescription)
-                return
-            }
-            if result.isFinal {
-                onEnd(result.bestTranscription.formattedString)
-            }
-            else {
-                onUpdate(result.bestTranscription.formattedString)
-            }
-        }
+        recognizer.recognitionTask(with: request, resultHandler: recognitionTaskCompletion)
     }
     
-    func askPermission() {
-        SFSpeechRecognizer.requestAuthorization { (authStatus) in
-            if authStatus != .authorized {
-                Util.errorHandler(NSLocalizedString("speech.apple.unauthorized", value: "Speech recognition was not authorized", comment: "Apple SR was unauthorized"))
-            }
+    func recognitionTaskCompletion(result: SFSpeechRecognitionResult?, error: Error?) {
+        guard let result = result else {
+            delegate?.onError(self, text: error?.localizedDescription ?? NSLocalizedString("speech.apple.result", value: "unknown error on recognition", comment: "An unknown error occurred."))
+            return
+        }
+        delegate?.onUpdate(self, text: result.bestTranscription.formattedString)
+        if result.isFinal {
+            delegate?.onEnd(self, text: result.bestTranscription.formattedString)
         }
     }
-
 }

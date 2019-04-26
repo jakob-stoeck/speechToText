@@ -10,29 +10,28 @@ import UIKit
 import MobileCoreServices
 import os.log
 
-class ActionViewController: UIViewController {
+class ActionViewController: UIViewController, SpeechRecognizerDelegate {
     
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var openSettingsButton: UIButton!
     
     func receivedUrl(url: URL) {
         onTranscription(text: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"))
+
+        let candidates: [SpeechRecognizer.Type] = [GoogleStreamingSpeechRecognizer.self, GoogleAsyncSpeechRecognizer.self, AppleSpeechRecognizer.self]
         
-        let candidates: [SpeechRecognizer] = [ GoogleStreamingSpeechRecognizer.sharedInstance, GoogleAsyncSpeechRecognizer.sharedInstance, AppleSpeechRecognizer.sharedInstance ]
-        guard let best = candidates.first(where: { $0.supports(url: url) }) else {
+        guard candidates.first(where: {
+            guard let rec = $0.init(url: url, lang: Settings.getLanguage(), delegate: self) else {
+                return false
+            }
+            rec.recognize()
+            return true
+        }) != nil else {
             return Util.errorHandler("No suitable speech recognizer found")
         }
-        
-        best.recognize(
-            url: url,
-            lang: Settings.getLanguage(),
-            onUpdate: self.onTranscription,
-            onEnd: self.onTranscription,
-            onError: self.onError
-        )
     }
     
-    func onError(_ text: String) {
+    func onError(_ sr: SpeechRecognizer, text: String) {
         let alert = UIAlertController(title: "Error",
                                       message: text,
                                       preferredStyle: UIAlertController.Style.alert)
@@ -44,6 +43,14 @@ class ActionViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func onUpdate(_ sr: SpeechRecognizer, text: String) {
+        onTranscription(text: text)
+    }
+
+    func onEnd(_ sr: SpeechRecognizer, text: String) {
+        onTranscription(text: text)
+    }
+
     func onTranscription(text: String) {
         os_log("onTranscription: \"%@\"", log: OSLog.default, type: .debug, text)
         guard let strongMessage = self.message else {

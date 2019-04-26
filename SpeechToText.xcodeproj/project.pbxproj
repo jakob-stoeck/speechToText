@@ -21,6 +21,7 @@
 		05C229892266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
 		05C2298A226786930052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
 		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
+		05EC8956226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga in Resources */ = {isa = PBXBuildFile; fileRef = 05EC8955226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
 		0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */; };
@@ -111,6 +112,7 @@
 		05B1293722306D70000D2C96 /* googleapis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = googleapis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAsyncSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05D70FD7224FF9C3003587C2 /* overoneminute.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = overoneminute.opus; sourceTree = "<group>"; };
+		05EC8955226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Franz_Schubert_-_Ellens_dritter_Gesang.oga"; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
 		102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 		CA20C7AF1F7104E2005CAA48 /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				05EC8955226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga */,
 				05A1936D2158160500B2199F /* 59secondsofsilence.ogg */,
 				05A1936B21580BB900B2199F /* twominsofsilence.ogg */,
 				05D70FD7224FF9C3003587C2 /* overoneminute.opus */,
@@ -490,6 +493,7 @@
 				057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */,
 				CA20C7B41F7104E2005CAA48 /* test.ogg in Resources */,
 				CA20C7B51F7104E2005CAA48 /* test.opus in Resources */,
+				05EC8956226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga in Resources */,
 				05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

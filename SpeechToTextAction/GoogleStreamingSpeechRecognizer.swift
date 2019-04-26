@@ -1,18 +1,3 @@
-//
-// Copyright 2016 Google Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
 import Foundation
 import googleapis
 import os.log
@@ -20,42 +5,52 @@ import os.log
 typealias SpeechRecognitionCompletionHandler = (StreamingRecognizeResponse?, NSError?) -> (Void)
 
 class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
+    let MAX_FILE_SIZE = 148000 // Cannot read all audio format metadata, yet. So use magic file size number for ~1 Minute.
     
-    static let sharedInstance = GoogleStreamingSpeechRecognizer()
+    let url: URL
+    let lang: String
+
+    let API_KEY: String
+    let HOST: String
+    let SAMPLE_RATE: Int
+    let sampleRate: Int
     
-    private let API_KEY = Util.getCloudSpeechApiKey()!
-    private let HOST = "speech.googleapis.com"
-    private let SAMPLE_RATE = 16000
-    private var sampleRate: Int = 16000
-    private var streaming = false
-    private var client: Speech!
-    private var writer: GRXBufferedPipe!
-    private var call: GRPCProtoCall!
-    private var lang = "en-US"
-    private var encoding: RecognitionConfig_AudioEncoding!
-    private var transcript: [String] = []
-    private let suffixToEncoding: [String: RecognitionConfig_AudioEncoding] = [
+    var streaming = false
+    var client: Speech!
+    var writer: GRXBufferedPipe!
+    var call: GRPCProtoCall!
+    var encoding: RecognitionConfig_AudioEncoding!
+    var transcript: [String] = []
+    static let suffixToEncoding: [String: RecognitionConfig_AudioEncoding] = [
         "ogg": .oggOpus,
+        "oga": .oggOpus,
         "opus": .oggOpus,
         "flac": .flac,
     ]
-    
-    func supports(url: URL) -> Bool {
-        let formatOk = suffixToEncoding.keys.contains(url.pathExtension)
-        // cannot read all audio format metadata, yet. So use magic file size number :/
-        let fileSizeOk = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize! < 148000) ?? false
-        return formatOk && fileSizeOk
+    weak var delegate: SpeechRecognizerDelegate?
+
+    required init?(url: URL, lang: String, delegate: SpeechRecognizerDelegate? = nil) {
+        self.url = url
+        self.lang = lang
+        self.HOST = "speech.googleapis.com"
+        self.SAMPLE_RATE = 16000
+        self.sampleRate = 16000
+        self.API_KEY = Util.getCloudSpeechApiKey()!
+        self.encoding = GoogleStreamingSpeechRecognizer.suffixToEncoding[url.pathExtension]
+        self.delegate = delegate
+        if self.encoding == nil {
+            delegate?.onError(self, text: NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+            return nil
+        }
+        guard let filesize = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else {
+            return nil
+        }
+        if (filesize > MAX_FILE_SIZE) {
+            return nil
+        }
     }
     
-    func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
-        
-        self.lang = lang
-        self.encoding = suffixToEncoding[url.pathExtension]
-        
-        if self.encoding == nil {
-            return onError(NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
-        }
-        
+    func recognize() {
         // We recommend sending samples in 100ms chunks
         let chunkSize : Int /* bytes/chunk */ = Int(0.1 /* seconds/chunk */
             * Double(SAMPLE_RATE) /* samples/second */
@@ -63,7 +58,8 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         
         // byte chunk of url and put into audio data
         guard let audioData = try? Data.init(contentsOf: url) else {
-            return onError(NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
+            delegate?.onError(self, text: NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
+            return
         }
         let chunks = audioData.count/chunkSize + (audioData.count % chunkSize == 0 ? 0 : 1)
         var baseText = ""
@@ -83,7 +79,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
             if let error = error {
                 os_log("error", type: .error)
                 self.stopStreaming()
-                onError(error.localizedDescription)
+                delegate?.onError(self, text: error.localizedDescription)
             } else if let response = response {
                 var text = ""
                 var final = false
@@ -104,11 +100,11 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
                 // contain only the text from then on forward, so merge them.
                 let separator = baseText != "" ? " " : ""
                 let semifinalText = baseText + separator + text
-                onUpdate(semifinalText)
+                delegate?.onUpdate(self, text: semifinalText)
                 
                 if timer != nil {
                     resetTimer(fun: { () -> Void in
-                        onEnd(semifinalText)
+                        self.delegate?.onEnd(self, text: semifinalText)
                         self.stopStreaming()
                         os_log("would be onEnd", type: .debug)
                     })
@@ -117,7 +113,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
                 if final {
                     baseText = semifinalText
                     resetTimer(fun: { () -> Void in
-                        onEnd(baseText)
+                        self.delegate?.onEnd(self, text: baseText)
                         self.stopStreaming()
                         os_log("would be onEnd", type: .debug)
                     })
@@ -131,7 +127,7 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
             let currentIndex = i*chunkSize
             let range = currentIndex..<min(currentIndex+chunkSize, audioData.count)
             let chunk = audioData.subdata(in: range)
-            self.streamAudioData(chunk)
+            streamAudioData(chunk)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {

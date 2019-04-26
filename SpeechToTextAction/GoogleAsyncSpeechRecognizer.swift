@@ -13,36 +13,37 @@ import os.log
 typealias operation = googleapis.Operation
 
 class GoogleAsyncSpeechRecognizer: SpeechRecognizer {
+    let url: URL
+    let lang: String
 
-    static let sharedInstance = GoogleAsyncSpeechRecognizer()
-    
-    private let API_KEY = Util.getCloudSpeechApiKey()!
-    private let HOST = "speech.googleapis.com"
-    private let SAMPLE_RATE = 16000
-    private var sampleRate: Int = 16000
+    let API_KEY: String
+    let HOST = "speech.googleapis.com"
+    let SAMPLE_RATE = 16000
+    let MAX_FILE_SIZE = 10485760
+    let sampleRate: Int = 16000
     private var streaming = false
-    private var lang = "en-US"
-    private var encoding: RecognitionConfig_AudioEncoding!
-    private var transcript: [String] = []
-    private let suffixToEncoding: [String: RecognitionConfig_AudioEncoding] = [
+    let encoding: RecognitionConfig_AudioEncoding!
+    let suffixToEncoding: [String: RecognitionConfig_AudioEncoding] = [
         "ogg": .oggOpus,
+        "oga": .oggOpus,
         "opus": .oggOpus,
         "flac": .flac,
     ]
+    weak var delegate: SpeechRecognizerDelegate?
     
-    func supports(url: URL) -> Bool {
-        return suffixToEncoding.keys.contains(url.pathExtension)
-    }
-    
-    func recognize(url: URL, lang: String, onUpdate: @escaping (String) -> (), onEnd: @escaping (String) -> (), onError: @escaping (String) -> ()) {
-        
+    required init?(url: URL, lang: String, delegate: SpeechRecognizerDelegate? = nil) {
+        self.url = url
         self.lang = lang
+        self.API_KEY = Util.getCloudSpeechApiKey()!
         self.encoding = suffixToEncoding[url.pathExtension]
-        
+        self.delegate = delegate
         if self.encoding == nil {
-            return onError(NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+            delegate?.onError(self, text: NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+            return nil
         }
+    }
 
+    func recognize() {
         // set up a gRPC connection
         let client = Speech(host:HOST)
         
@@ -55,51 +56,75 @@ class GoogleAsyncSpeechRecognizer: SpeechRecognizer {
         config.enableAutomaticPunctuation = true
 
         guard let audioData = try? Data.init(contentsOf: url) else {
-            return onError(NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
+            delegate?.onError(self, text: NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
+            return
         }
         let req = LongRunningRecognizeRequest()
         req.config = config
-        req.audio.content = audioData
-        
-        onUpdate(NSLocalizedString("action.loading_title", value: "Transcribing ... This is a longer message. It takes around 30 seconds to transcribe. Please wait.", comment: "Notification that transcription will take a bit"))
-        
-        let call = client.rpcToLongRunningRecognize(with: req) { op, err in
-            if err != nil {
-                return onError(err!.localizedDescription)
-            }
-            
-            let operations = GoogleLongrunningOperations(host: self.HOST, apiKey: self.API_KEY)
-            operations.wait(op: op) { op, err in
-                if err != nil {
-                    return onError(err!.localizedDescription)
-                }
-                do {
-                    let data = (op?.response.value)!
-                    let longRunningRecognizeResponse = try LongRunningRecognizeResponse.init(data: data)
-                    var text = ""
-
-                    for speechRecognitionResult in longRunningRecognizeResponse.resultsArray! {
-                        guard let speechRecognitionResult = speechRecognitionResult as? SpeechRecognitionResult else {
-                            return onError("Parsing failed")
-                        }
-                        guard let alternative = speechRecognitionResult.alternativesArray[0] as? SpeechRecognitionAlternative else {
-                            return onError("Parsing failed")
-                        }
-                        if text == "" {
-                            text = alternative.transcript
-                        } else {
-                            text += " " + alternative.transcript
-                        }
-                    }
-                    return onEnd(text)
-                } catch {
-                    return onError(error.localizedDescription)
-                }
-            }
+        if (audioData.count > MAX_FILE_SIZE) {
+            req.audio.content = audioData.prefix(MAX_FILE_SIZE)
+            delegate?.onUpdate(self, text: NSLocalizedString("action.loading_title", value: "Transcribing ... Only the first 10 MB of this file are supported. Please wait.", comment: "Notification that transcription will take a bit"))
         }
+        else {
+            req.audio.content = audioData
+            delegate?.onUpdate(self, text: NSLocalizedString("action.loading_title", value: "Transcribing ... This is a longer message. It takes around 30 seconds to transcribe. Please wait.", comment: "Notification that transcription will take a bit"))
+        }
+        
+        // start asynchronuous recognize task and poll continuously for progress and completion information
+        
+        // TODO upload to gstorage
+        let call = client.rpcToLongRunningRecognize(with: req, handler: longRunningRecognizeCompletion)
         call.requestHeaders.setObject(NSString(string:API_KEY), forKey:NSString(string:"X-Goog-Api-Key"))
-        // if the API key has a bundle ID restriction, specify the bundle ID like this
         call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!), forKey:NSString(string:"X-Ios-Bundle-Identifier"))
         call.start()
+    }
+    
+    func longRunningRecognizeCompletion(op: Operation?, err: Error?) {
+        if err != nil {
+            delegate?.onError(self, text: err!.localizedDescription)
+            return
+        }
+        let operations = GoogleLongrunningOperations(host: self.HOST, apiKey: self.API_KEY)
+        operations.wait(op: op, completion: operationsPoll)
+    }
+    
+    func operationsPoll(op: Operation?, err: Error?) {
+        if err != nil {
+            delegate?.onError(self, text: err!.localizedDescription)
+            return
+        }
+        guard let op = op else {
+            return
+        }
+        if !op.done {
+            let metadataValue = op.metadata.value
+            let longRunningRecognizeMetadata = try! LongRunningRecognizeMetadata.init(data: metadataValue!)
+            delegate?.onUpdate(self, text: "Transcribing ... \(longRunningRecognizeMetadata.progressPercent)% after \(longRunningRecognizeMetadata.lastUpdateTime.seconds-longRunningRecognizeMetadata.startTime.seconds) seconds")
+            return
+        }
+        do {
+            let data = (op.response.value)!
+            let longRunningRecognizeResponse = try LongRunningRecognizeResponse.init(data: data)
+            var text = ""
+            
+            for speechRecognitionResult in longRunningRecognizeResponse.resultsArray! {
+                guard let speechRecognitionResult = speechRecognitionResult as? SpeechRecognitionResult else {
+                    delegate?.onError(self, text: "Parsing failed")
+                    return
+                }
+                guard let alternative = speechRecognitionResult.alternativesArray[0] as? SpeechRecognitionAlternative else {
+                    delegate?.onError(self, text: "Parsing failed")
+                    return
+                }
+                if text == "" {
+                    text = alternative.transcript
+                } else {
+                    text += " " + alternative.transcript
+                }
+            }
+            delegate?.onEnd(self, text: text)
+        } catch {
+            delegate?.onError(self, text: error.localizedDescription)
+        }
     }
 }

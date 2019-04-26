@@ -22,33 +22,31 @@ class GoogleLongrunningOperations {
         self.pollInterval = pollInterval
     }
     
-    func wait(op: Operation?, onDone: @escaping (Operation?, Error?) -> Void) {
-        return wait(op: op, err: nil, onDone: onDone)
+    func wait(op: Operation?, completion: @escaping (Operation?, Error?) -> Void) {
+        return wait(op: op, err: nil, completion: completion)
     }
 
-    private func wait(op: Operation?, err: Error?, onDone: @escaping (Operation?, Error?) -> Void) {
+    private func wait(op: Operation?, err: Error?, completion: @escaping (Operation?, Error?) -> Void) {
         guard let op = op else {
-            return onDone(nil, err)
+            return completion(nil, err)
         }
-        if op.done {
-            return onDone(op, err)
-        }
-        else {
+        completion(op, err)
+        if (!op.done) {
             // poll until operation is complete
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(pollInterval)) {
-                self.get(op: op, onDone: onDone)
+                self.get(op: op, completion: completion)
             }
         }
     }
     
-    private func get(op: Operation, onDone: @escaping (Operation?, Error?) -> Void) {
+    private func get(op: Operation, completion: @escaping (Operation?, Error?) -> Void) {
         let opReq = GetOperationRequest()
         opReq.name = op.name
         let call = client.rpcToGetOperation(with: opReq) { (op, err) in
             if (err != nil) {
-                return onDone(nil, err)
+                return completion(nil, err)
             }
-            self.wait(op: op, err: err, onDone: onDone)
+            self.wait(op: op, err: err, completion: completion)
         }
         call.requestHeaders.setObject(NSString(string:self.apiKey), forKey:NSString(string:"X-Goog-Api-Key"))
         call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!), forKey:NSString(string:"X-Ios-Bundle-Identifier"))
