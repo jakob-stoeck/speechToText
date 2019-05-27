@@ -55,28 +55,36 @@ class GoogleAsyncSpeechRecognizer: SpeechRecognizer {
         config.enableWordTimeOffsets = false
         config.enableAutomaticPunctuation = true
 
-        guard let audioData = try? Data.init(contentsOf: url) else {
+        guard var audioData = try? Data.init(contentsOf: url) else {
             delegate?.onError(self, text: NSLocalizedString("speech.google.loading", value: "Cannot read audio file", comment: "Audio file is not readable"))
             return
         }
-        let req = LongRunningRecognizeRequest()
-        req.config = config
         if (audioData.count > MAX_FILE_SIZE) {
-            req.audio.content = audioData.prefix(MAX_FILE_SIZE)
+            audioData = audioData.prefix(MAX_FILE_SIZE)
             delegate?.onUpdate(self, text: NSLocalizedString("action.loading_title", value: "Transcribing ... Only the first 10 MB of this file are supported. Please wait.", comment: "Notification that transcription will take a bit"))
         }
         else {
-            req.audio.content = audioData
             delegate?.onUpdate(self, text: NSLocalizedString("action.loading_title", value: "Transcribing ... This is a longer message. It takes around 30 seconds to transcribe. Please wait.", comment: "Notification that transcription will take a bit"))
+        }     
+        
+        let storageClient = Storage(host: "www.googleapis.com", apiKey: API_KEY)
+        let fileName = UUID().uuidString
+        let bucketName = "twss"
+        storageClient.upload(bucket: bucketName, name: fileName, data: audioData) { resp, err in
+            if err != nil {
+                self.delegate?.onError(self, text: err!.localizedDescription)
+                return
+            }
+            let req = LongRunningRecognizeRequest()
+            req.config = config
+            req.audio.uri = "gs://\(bucketName)/\(fileName)"
+            
+            // start asynchronuous recognize task and poll continuously for progress and completion information
+            let call = client.rpcToLongRunningRecognize(with: req, handler: self.longRunningRecognizeCompletion)
+            call.requestHeaders.setObject(NSString(string:self.API_KEY), forKey:NSString(string:"X-Goog-Api-Key"))
+            call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!), forKey:NSString(string:"X-Ios-Bundle-Identifier"))
+            call.start()
         }
-        
-        // start asynchronuous recognize task and poll continuously for progress and completion information
-        
-        // TODO upload to gstorage
-        let call = client.rpcToLongRunningRecognize(with: req, handler: longRunningRecognizeCompletion)
-        call.requestHeaders.setObject(NSString(string:API_KEY), forKey:NSString(string:"X-Goog-Api-Key"))
-        call.requestHeaders.setObject(NSString(string:Bundle.main.bundleIdentifier!), forKey:NSString(string:"X-Ios-Bundle-Identifier"))
-        call.start()
     }
     
     func longRunningRecognizeCompletion(op: Operation?, err: Error?) {

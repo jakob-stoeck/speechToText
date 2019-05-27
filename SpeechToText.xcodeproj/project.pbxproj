@@ -24,6 +24,8 @@
 		05EC8956226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga in Resources */ = {isa = PBXBuildFile; fileRef = 05EC8955226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga */; };
 		05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */; };
+		05FDFA3D228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FDFA3C228A6F1A003F88EC /* GoogleCloudStorage.swift */; };
+		05FDFA3E228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FDFA3C228A6F1A003F88EC /* GoogleCloudStorage.swift */; };
 		0A585B5E30A2C6B08D716063 /* Pods_SpeechToTextUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CEA7DC066643B17128F140 /* Pods_SpeechToTextUITests.framework */; };
 		162135B2CD07D5E6351788E2 /* Pods_SpeechToTextTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */; };
 		93F9B9C8068157C00F009193 /* Pods_SpeechToText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC372E5180A19E87F864EBD7 /* Pods_SpeechToText.framework */; };
@@ -115,6 +117,7 @@
 		05EC8955226CE61B000435A9 /* Franz_Schubert_-_Ellens_dritter_Gesang.oga */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Franz_Schubert_-_Ellens_dritter_Gesang.oga"; sourceTree = "<group>"; };
 		05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleJsonSpeechRecognizer.swift; sourceTree = "<group>"; };
 		05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechRecognizer.swift; sourceTree = "<group>"; };
+		05FDFA3C228A6F1A003F88EC /* GoogleCloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCloudStorage.swift; sourceTree = "<group>"; };
 		102B75D4BE22D2E018BA6BF5 /* Pods_SpeechToTextTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTextTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1449FDC256E9E6E73F250CE5 /* Pods-SpeechToTextUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextUITests.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTextUITests/Pods-SpeechToTextUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3C6F1C4FFA21BCEF4DA30936 /* Pods-SpeechToTextAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTextAction.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTextAction/Pods-SpeechToTextAction.release.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 				CAC2594B1F69C954007C4BB3 /* Util.swift */,
 				05F45CF822229F0900ECBBAD /* AppleSpeechRecognizer.swift */,
 				0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */,
+				05FDFA3C228A6F1A003F88EC /* GoogleCloudStorage.swift */,
 			);
 			path = SpeechToTextAction;
 			sourceTree = "<group>";
@@ -596,6 +600,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-SpeechToText/Pods-SpeechToText-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -610,6 +615,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -666,6 +672,7 @@
 				CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */,
 				05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				0518D5EE2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
+				05FDFA3E228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */,
 				CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				CAC259511F69D836007C4BB3 /* Util.swift in Sources */,
 				050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */,
@@ -691,6 +698,7 @@
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
 				057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */,
 				0518D5ED2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
+				05FDFA3D228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */,
 				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
