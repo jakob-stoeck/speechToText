@@ -30,3 +30,4 @@ build/
 
 # Cocoapods
 Pods
+.env

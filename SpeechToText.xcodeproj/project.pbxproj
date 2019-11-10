@@ -11,13 +11,13 @@
 		050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F45CF622229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift */; };
 		0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
 		05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516688E222DCE060054FA5A /* GoogleStreamingSpeechRecognizer.swift */; };
-		0518D5ED2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
-		0518D5EE2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
 		056622ED222200F800D566DE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0546A02B2221CFE50099EFFC /* MainInterface.storyboard */; };
 		057285CD2221F3AC0020B2BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA35C9551F5EF9CF004B5A32 /* Localizable.strings */; };
 		057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0546A0292221CFE50099EFFC /* ActionViewController.swift */; };
 		05A1936C21580BB900B2199F /* twominsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936B21580BB900B2199F /* twominsofsilence.ogg */; };
 		05A1936E2158160500B2199F /* 59secondsofsilence.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 05A1936D2158160500B2199F /* 59secondsofsilence.ogg */; };
+		05BDA53C2377F40400DEEB46 /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
+		05BDA53D2377F40500DEEB46 /* GoogleLongrunningOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518D5EC2269FC99009B5A6F /* GoogleLongrunningOperations.swift */; };
 		05C229892266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
 		05C2298A226786930052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C229882266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift */; };
 		05D70FD8224FF9C4003587C2 /* overoneminute.opus in Resources */ = {isa = PBXBuildFile; fileRef = 05D70FD7224FF9C3003587C2 /* overoneminute.opus */; };
@@ -594,13 +594,10 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SpeechToText/Pods-SpeechToText-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -610,12 +607,9 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -671,11 +665,11 @@
 			files = (
 				CAAEE42E1EC1CDEF00292860 /* SpeechToTextTests.swift in Sources */,
 				05166890222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
-				0518D5EE2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
 				05FDFA3E228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */,
 				CAC2594D1F69D3E4007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				CAC259511F69D836007C4BB3 /* Util.swift in Sources */,
 				050E0C41224A7425006CF681 /* GoogleJsonSpeechRecognizer.swift in Sources */,
+				05BDA53C2377F40400DEEB46 /* GoogleLongrunningOperations.swift in Sources */,
 				CAC2594F1F69D829007C4BB3 /* Settings.swift in Sources */,
 				050E0C40224A73D2006CF681 /* AppleSpeechRecognizer.swift in Sources */,
 				05C2298A226786930052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */,
@@ -697,11 +691,11 @@
 			files = (
 				CAFD70081F60176F007862D8 /* Settings.swift in Sources */,
 				057285CE2221F3B20020B2BF /* ActionViewController.swift in Sources */,
-				0518D5ED2269FC99009B5A6F /* GoogleLongrunningOperations.swift in Sources */,
 				05FDFA3D228A6F1A003F88EC /* GoogleCloudStorage.swift in Sources */,
 				CAC2594A1F69C89B007C4BB3 /* SpeechRecognizer.swift in Sources */,
 				0516688F222DCE070054FA5A /* GoogleStreamingSpeechRecognizer.swift in Sources */,
 				CAC2594C1F69C954007C4BB3 /* Util.swift in Sources */,
+				05BDA53D2377F40500DEEB46 /* GoogleLongrunningOperations.swift in Sources */,
 				05F45CF722229ECA00ECBBAD /* GoogleJsonSpeechRecognizer.swift in Sources */,
 				05F45CF922229F0900ECBBAD /* AppleSpeechRecognizer.swift in Sources */,
 				05C229892266692D0052EC07 /* GoogleAsyncSpeechRecognizer.swift in Sources */,

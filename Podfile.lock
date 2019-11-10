@@ -55,7 +55,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - "!ProtoCompiler"
     - "!ProtoCompiler-gRPCPlugin"
     - BoringSSL-GRPC
@@ -83,9 +83,8 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: 562e2a6d12137d15dfb93bbf652bd3f638e3eb8a
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 75691c7b8cb29631074ebcf407578505a22629b7
+PODFILE CHECKSUM: 2f037e2a3fc948310a53a3a9ed25b2b346c12f4a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
