@@ -18,7 +18,7 @@ class ActionViewController: UIViewController, SpeechRecognizerDelegate {
     func receivedUrl(url: URL) {
         onTranscription(text: NSLocalizedString("action.loading_title", value: "Transcribing ...", comment: "Notification title while transcription in progress"))
 
-        let candidates: [SpeechRecognizer.Type] = [GoogleStreamingSpeechRecognizer.self, GoogleAsyncSpeechRecognizer.self, AppleSpeechRecognizer.self]
+        let candidates: [SpeechRecognizer.Type] = [GoogleStreamingSpeechRecognizer.self, AppleSpeechRecognizer.self]
         
         guard candidates.first(where: {
             guard let rec = $0.init(url: url, lang: Settings.getLanguage(), delegate: self) else {
