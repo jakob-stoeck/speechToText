@@ -23,6 +23,7 @@ class AppleSpeechRecognizer: SpeechRecognizer {
         self.lang = lang.replacingOccurrences(of: "-", with: "_")
         self.delegate = delegate
         if !supportedFormats.contains(url.pathExtension) {
+            os_log("unsupported apple format %@", type: .debug, url.absoluteString)
             return nil
         }
     }
@@ -49,13 +50,14 @@ class AppleSpeechRecognizer: SpeechRecognizer {
     }
     
     func recognitionTaskCompletion(result: SFSpeechRecognitionResult?, error: Error?) {
-        guard let result = result else {
-            delegate?.onError(self, text: error?.localizedDescription ?? NSLocalizedString("speech.apple.result", value: "unknown error on recognition", comment: "An unknown error occurred."))
-            return
+        if let error = error {
+            delegate?.onError(self, text: error.localizedDescription)
         }
-        delegate?.onUpdate(self, text: result.bestTranscription.formattedString)
-        if result.isFinal {
-            delegate?.onEnd(self, text: result.bestTranscription.formattedString)
+        else if let result = result {
+            delegate?.onUpdate(self, text: result.bestTranscription.formattedString)
+            if result.isFinal {
+                delegate?.onEnd(self, text: result.bestTranscription.formattedString)
+            }
         }
     }
 }

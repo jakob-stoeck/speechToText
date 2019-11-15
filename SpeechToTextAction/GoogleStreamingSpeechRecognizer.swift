@@ -39,7 +39,8 @@ class GoogleStreamingSpeechRecognizer: SpeechRecognizer {
         self.encoding = GoogleStreamingSpeechRecognizer.suffixToEncoding[url.pathExtension]
         self.delegate = delegate
         if self.encoding == nil {
-            delegate?.onError(self, text: NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
+            os_log("unsupported google format %@", type: .debug, url.absoluteString)
+//            delegate?.onError(self, text: NSLocalizedString("speech.google.format", value: "Format unsupported", comment: "Google was requested with unsupported format"))
             return nil
         }
         guard let filesize = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else {
